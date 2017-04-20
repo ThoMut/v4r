@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.2.1, 2017-04-14T18:31:06. -->
+<!-- Written by QtCreator 4.2.1, 2017-04-18T20:03:54. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -203,7 +203,7 @@
      <value type="QString">CMAKE_PREFIX_PATH:STRING=%{Qt:QT_INSTALL_PREFIX}</value>
      <value type="QString">QT_QMAKE_EXECUTABLE:FILEPATH=/usr/bin/qmake-qt4</value>
     </valuelist>
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/home/thomas/DA_offline/v4r-1604-v2/redDeb</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/home/thomas/DA_offline/v4r-1604-v2-fix_param</value>
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="QString" key="CMakeProjectManager.MakeStep.AdditionalArguments">-j4</value>
@@ -355,7 +355,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">3dReconstructionBySiftAndMST</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">3dReconstructionBySiftAndMST</value>
@@ -411,7 +411,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">RTMT</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">RTMT</value>
@@ -467,7 +467,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">compute_recognition_rate_over_occlusion</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">compute_recognition_rate_over_occlusion</value>
@@ -523,7 +523,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">compute_recognition_rate</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">compute_recognition_rate</value>
@@ -579,7 +579,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">ObjectRecognizerEval</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">ObjectRecognizerEval</value>
@@ -635,7 +635,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">compute_confusion_matrix</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">compute_confusion_matrix</value>
@@ -691,7 +691,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">example_ExmplWTA</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">example_ExmplWTA</value>
@@ -747,7 +747,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">example_ExmplIttiSaliencyMap</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">example_ExmplIttiSaliencyMap</value>
@@ -803,7 +803,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">example_ExmplSurfCurvatureMap</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">example_ExmplSurfCurvatureMap</value>
@@ -859,7 +859,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">example_keypoint_extraction</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">example_keypoint_extraction</value>
@@ -915,7 +915,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">example_ExmplOrientationMap</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">example_ExmplOrientationMap</value>
@@ -971,7 +971,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">example_incremental_object_learning</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">example_incremental_object_learning</value>
@@ -1027,7 +1027,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">trainSVM</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">trainSVM</value>
@@ -1083,7 +1083,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">example_ExmplSymSalMap</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">example_ExmplSymSalMap</value>
@@ -1139,7 +1139,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">example_imkRecognizeObject-file</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">example_imkRecognizeObject-file</value>
@@ -1195,7 +1195,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">example_noise_model_based_cloud_integration</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">example_noise_model_based_cloud_integration</value>
@@ -1251,7 +1251,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">example_ExmplSurfOrientationMap</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">example_ExmplSurfOrientationMap</value>
@@ -1307,7 +1307,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">example_ExmplFrintropSaliencyMap</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">example_ExmplFrintropSaliencyMap</value>
@@ -1363,7 +1363,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">example_ExmplSurfHeightMap</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">example_ExmplSurfHeightMap</value>
@@ -1419,7 +1419,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">example_depth_map_renderer</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">example_depth_map_renderer</value>
@@ -1475,7 +1475,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">example_Exmpl3DSymSalMap</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">example_Exmpl3DSymSalMap</value>
@@ -1531,7 +1531,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">example_segment_pcd</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">example_segment_pcd</value>
@@ -1587,7 +1587,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">example_classify_with_RF</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">example_classify_with_RF</value>
@@ -1643,7 +1643,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">segment</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">segment</value>
@@ -1699,7 +1699,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">example_ExmplMSR</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">example_ExmplMSR</value>
@@ -1755,7 +1755,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">example_temporalFiltering</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">example_temporalFiltering</value>
@@ -1811,7 +1811,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">example_ExmplHitRatio</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">example_ExmplHitRatio</value>
@@ -1867,7 +1867,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">example_classify_with_SVM_tmp</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">example_classify_with_SVM_tmp</value>
@@ -1923,7 +1923,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">example_esf_object_classifier</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">example_esf_object_classifier</value>
@@ -1979,7 +1979,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">example_ExmplSalLine</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">example_ExmplSalLine</value>
@@ -2035,7 +2035,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">example_object_tracker_mono</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">example_object_tracker_mono</value>
@@ -2091,7 +2091,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">example_ExmplColorMap</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">example_ExmplColorMap</value>
@@ -2147,7 +2147,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">example_ExmplLocationMap</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">example_ExmplLocationMap</value>
@@ -2203,7 +2203,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">tool_pcd2png</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">tool_pcd2png</value>
@@ -2259,7 +2259,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">createTrainingSet</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">createTrainingSet</value>
@@ -2315,7 +2315,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">tool_visualize_hypothesis</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">tool_visualize_hypothesis</value>
@@ -2371,7 +2371,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">tool_create_classification_db_from_ply_files</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">tool_create_classification_db_from_ply_files</value>
@@ -2427,7 +2427,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">tool_create_annotated_images_from_recognition_gt_data</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">tool_create_annotated_images_from_recognition_gt_data</value>
@@ -2483,7 +2483,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">tool_convertOldModelDatabaseToNew</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">tool_convertOldModelDatabaseToNew</value>
@@ -2539,7 +2539,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">tool_pcd_ground_truth_labelling</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">tool_pcd_ground_truth_labelling</value>
@@ -2595,7 +2595,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">tool_view_all_point_clouds_in_folder</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">tool_view_all_point_clouds_in_folder</value>
@@ -2651,7 +2651,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">tool_save_pose_into_pcd</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">tool_save_pose_into_pcd</value>
@@ -2707,7 +2707,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">scaleTrainingSet</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">scaleTrainingSet</value>
@@ -2763,7 +2763,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">segmentAttention</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">segmentAttention</value>
@@ -2819,7 +2819,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">segmentIncremental</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">segmentIncremental</value>
@@ -2873,9 +2873,9 @@
      <value type="int">14</value>
     </valuelist>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">ObjectRecognizer</value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments">-m /home/thomas/DA/shared_docker_host/data/models_2opt_test -t /home/thomas/DA/shared_docker_host/data/scenes_test -v --plane_extraction_method 8 -z 1 --remove_points_below_selected_plane 1 --remove_planes 1 --plane_extractor_maxStepSize 0.1 --use_highest_plane 1 --min_plane_inliers 10000</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments">-m /home/thomas/DA/shared_docker_host/data/models_2opt -t /home/thomas/DA/shared_docker_host/data/scenes_archiv/photo3.pcd -v --plane_extraction_method 8 -z 2 --remove_points_below_selected_plane 0 --use_highest_plane 0</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">ObjectRecognizer</value>
@@ -2931,7 +2931,7 @@
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">check_hypotheses</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2/redDeb/bin</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/thomas/DA_offline/v4r-1604-v2-fix_param/bin</value>
     <value type="int" key="PE.EnvironmentAspect.Base">-1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">check_hypotheses</value>

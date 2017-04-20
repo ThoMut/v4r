@@ -51,7 +51,7 @@ private:
     {
         hv_config_xml_ = "cfg/hv_config.xml";
         shot_config_xml_ = "cfg/shot_config.xml";
-        global_recognition_pipeline_config_ =  {};//{"cfg/esf_config.xml", "cfg/alexnet_config.xml"};
+        global_recognition_pipeline_config_ = {"cfg/esf_config.xml"}; // "cfg/alexnet_config.xml"};
         camera_config_xml_ = "cfg/camera.xml";
         depth_img_mask_ = "cfg/xtion_depth_mask.png";
         sift_config_xml_ = "cfg/sift_config.xml";
@@ -159,12 +159,12 @@ private:
     template<class Archive> V4R_EXPORTS void serialize(Archive & ar, const unsigned int version)
     {
         (void) version;
-        ar & BOOST_SERIALIZATION_NVP(hv_config_xml_)
-                & BOOST_SERIALIZATION_NVP(shot_config_xml_)
-                & BOOST_SERIALIZATION_NVP(global_recognition_pipeline_config_)
-                & BOOST_SERIALIZATION_NVP(camera_config_xml_)
-                & BOOST_SERIALIZATION_NVP(depth_img_mask_)
-                & BOOST_SERIALIZATION_NVP(sift_config_xml_)
+        ar //& BOOST_SERIALIZATION_NVP(hv_config_xml_)
+//                & BOOST_SERIALIZATION_NVP(shot_config_xml_)
+//                & BOOST_SERIALIZATION_NVP(global_recognition_pipeline_config_)
+//                & BOOST_SERIALIZATION_NVP(camera_config_xml_)
+//                & BOOST_SERIALIZATION_NVP(depth_img_mask_)
+//                & BOOST_SERIALIZATION_NVP(sift_config_xml_)
                 & BOOST_SERIALIZATION_NVP(cg_size_)
                 & BOOST_SERIALIZATION_NVP(cg_thresh_)
                 & BOOST_SERIALIZATION_NVP(use_graph_based_gc_grouping_)
