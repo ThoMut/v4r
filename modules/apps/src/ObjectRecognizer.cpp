@@ -124,7 +124,7 @@ void ObjectRecognizer<PointT>::initialize(const std::vector<std::string> &comman
             ("camera_xml", po::value<std::string>(&param_.camera_config_xml_), "camera config file")
             ("sift_config_xml", po::value<std::string>(&param_.sift_config_xml_), "sift config file")
             ("shot_config_xml", po::value<std::string>(&param_.shot_config_xml_), "shot config file")
-            //("esf_config_xml", po::value<std::string>(&param_.esf_config_xml_), "esf config file")
+            ("esf_config_xml", po::value<std::string>(&param_.global_recognition_pipeline_config_[0]), "esf config file")
             ("hv_config_xml", po::value<std::string>(&param_.hv_config_xml_), "hv config file")
             ;
     po::variables_map vm;
