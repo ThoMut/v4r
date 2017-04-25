@@ -32,7 +32,7 @@
 
 #ifndef Q_MOC_RUN
 #include "MeshCreation.h"
-#include <v4r/keypoints/impl/toString.hpp>
+//#include <v4r/keypoints/impl/toString.hpp>
 #endif
 
 using namespace std;
@@ -170,6 +170,11 @@ void MeshCreation::calculateMesh()
     mesh.reset(new pcl::PolygonMesh);
     mesh = surface.reconstruct(model_cloud);
 
+    //pcl::io::saveVTKFile("/home/thomas/Desktop/test/mesh.vtk", *mesh);
+//    pcl::io::savePolygonFileVTK("/home/thomas/Desktop/test/mesh.vtk", *mesh);
+//    pcl::PolygonMesh mesh_test;
+//    pcl::io::loadPolygonFileVTK("/home/thomas/Desktop/test/mesh.vtk", *mesh);
+
     cout<<endl<<"Press ..."<<endl;
     cout<<"  [r] to activate rotation mode"<<endl;
     cout<<"  [e] to continue with object texturing"<<endl<<endl;
@@ -189,6 +194,7 @@ void MeshCreation::calculateMesh()
 //    }
 
     //emit update_visualization();
+
     std::string txt = std::string("Status: Mesh created");
     emit finishedCreateMesh();
     emit printStatus(txt);
@@ -207,6 +213,7 @@ bool MeshCreation::saveMesh(const std::string &_folder, const std::string &_mode
     pcl::io::savePolygonFileVTK(_folder + "/models/" + _modelname + "/mesh" + "/mesh.vtk", *mesh);
     pcl::io::savePolygonFilePLY(_folder + "/models/" + _modelname + "/mesh" + "/mesh.ply", *mesh);
     pcl::io::savePolygonFileSTL(_folder + "/models/" + _modelname + "/mesh" + "/mesh.stl", *mesh);
+    //PROBLEM: Numbers in File are stored with comma instead of point!
     return true;
 }
 

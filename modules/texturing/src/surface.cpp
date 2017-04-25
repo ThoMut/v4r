@@ -220,7 +220,6 @@ pcl::PolygonMesh::Ptr Surface::reconstruct(pcl::PointCloud<pcl::PointXYZRGBNorma
 
         pcl::toPCLPointCloud2(*meshCloud, mesh->cloud);
     }
-
     return mesh;
 }
 
