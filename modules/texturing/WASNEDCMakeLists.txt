@@ -1,0 +1,54 @@
+SET(V4R_TEXTURING 1 CACHE BOOL "Texturing" )
+IF(V4R_TEXTURING)
+
+#FIND_PACKAGE (OpenCV)
+include_directories(${OPENCV_INCLUDE_DIRS})
+link_directories(${OPENCV_LIBRARY_DIRS})
+
+include_directories(${PCL_INCLUDE_DIRS})
+link_directories(${PCL_LIBRARY_DIRS})
+add_definitions(${PCL_DEFINITIONS})
+
+find_package(Boost REQUIRED COMPONENTS thread program_options serialization regex filesystem system)
+INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
+
+find_package(OpenMP)
+if (OPENMP_FOUND)
+    set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
+    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
+endif()
+
+
+PROJECT(v4rTexturing)
+
+SET(SOURCE_CPP
+  reader.cpp
+  renderer.cpp
+  surface.cpp
+  multiband.cpp
+  AdvancedPclVisualizer.cpp
+  hittingset.cpp
+)
+
+SET(SOURCE_H
+  reader.h
+  renderer.h
+  surface.h
+  multiband.h
+  AdvancedPclVisualizer.h
+  TexturedMesh.h
+  hittingset.h
+  export.h
+)
+
+
+add_library(${PROJECT_NAME} SHARED ${SOURCE_H} ${SOURCE_CPP})
+target_link_libraries(${PROJECT_NAME} ${OPENCV_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES} ${PCL_LIBRARIES})
+
+v4r_add_library(${PROJECT_NAME} "${SOURCE_H}")
+
+ENDIF(V4R_TEXTURING)
+
+
+

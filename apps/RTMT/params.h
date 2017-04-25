@@ -80,6 +80,14 @@ public:
   BundleAdjustmentParameter() : dist_cam_add_projections(0.1) {}
 };
 
+class MeshCreationParameter
+{
+public:
+    int poisson_depth;
+    int poisson_nr_samples;
+    MeshCreationParameter() : poisson_depth(5), poisson_nr_samples(20) {}
+};
+
 class SegmentationParameter
 {
 public:
@@ -127,6 +135,7 @@ signals:
   void cam_tracker_params_changed(const CamaraTrackerParameter& param);
   void rgbd_path_changed();
   void bundle_adjustment_parameter_changed(const BundleAdjustmentParameter& param);
+  void mesh_creation_parameter_changed(const MeshCreationParameter& param);
   void segmentation_parameter_changed(const SegmentationParameter& param);
   void object_modelling_parameter_changed(const ObjectModelling& param);
   void set_roi_params(const double &_bbox_scale_xy, const double &_bbox_scale_height, const double &_seg_offs);
@@ -149,6 +158,7 @@ private:
   RGBDCameraParameter cam_params;
   CamaraTrackerParameter cam_tracker_params;
   BundleAdjustmentParameter ba_params;
+  MeshCreationParameter mc_params;
   SegmentationParameter seg_params;
   ObjectModelling om_params;
 

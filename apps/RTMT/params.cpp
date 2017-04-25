@@ -57,7 +57,6 @@ Params::~Params()
   delete ui;
 }
 
-
 void Params::apply_params()
 {
   cam_tracker_params.log_point_clouds = ui->logPointClouds->isChecked();
@@ -68,14 +67,19 @@ void Params::apply_params()
   cam_tracker_params.prev_z_cutoff = ui->prevZCutOff->text().toFloat();
 
   ba_params.dist_cam_add_projections = ui->distCamAddProjections->text().toFloat();
+
+  mc_params.poisson_depth = ui->poissonDepth->text().toFloat();
+  mc_params.poisson_nr_samples = ui->poissonNrSamples->text().toFloat();
+
   seg_params.inl_dist_plane = ui->inlDistPlane->text().toFloat();
   seg_params.thr_angle = ui->thrAngle->text().toFloat();
   seg_params.min_points_plane = ui->minPointsPlane->text().toFloat();
-  om_params.vx_size_object = ui->vxSizeObject->text().toFloat();
 
+  om_params.vx_size_object = ui->vxSizeObject->text().toFloat();
 
   emit cam_tracker_params_changed(cam_tracker_params);
   emit bundle_adjustment_parameter_changed(ba_params);
+  emit mesh_creation_parameter_changed(mc_params);
   emit segmentation_parameter_changed(seg_params);
   emit object_modelling_parameter_changed(om_params);
   emit set_roi_params(ui->roi_scale_xy->text().toFloat(), ui->roi_scale_height->text().toFloat(), ui->roi_offs->text().toFloat());

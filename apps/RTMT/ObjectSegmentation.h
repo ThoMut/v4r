@@ -90,6 +90,8 @@ public:
   const std::vector<std::vector<int> > &getObjectIndices() {return indices; }
   const Eigen::Matrix4f &getObjectBaseTransform() {return object_base_transform; }
 
+  pcl::PointCloud<pcl::PointXYZRGBNormal>::Ptr &getModelCloud() {return ncloud_filt; }
+
 public slots:
   void segment_image(int x, int y);
   void set_image(int idx);

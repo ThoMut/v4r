@@ -555,8 +555,6 @@ void ObjectSegmentation::drawObjectCloud()
 }
 
 
-
-
 /*********************************** private *******************************************/
 /**
  * @brief ObjectSegmentation::run
