@@ -198,6 +198,9 @@ MainWindow::MainWindow(QWidget *parent) :
   connect(m_multi_session, SIGNAL(update_visualization()),
           m_glviewer, SLOT(update_visualization()));
 
+  connect(m_glviewer, SIGNAL(activate_start_modelling()),
+          this, SLOT(activate_start_modelling()));
+
 
   m_params->apply_cam_params();
   m_params->apply_params();
@@ -206,6 +209,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
   //start Camera
   setStartVis();
+
+  m_ui->StartModelling->setEnabled(false);
+  m_ui->FinishModelling->setEnabled(false);
 
   m_sensor->start(0);
   //m_glviewer->drawBoundingBox(false);
@@ -234,27 +240,7 @@ MainWindow::~MainWindow()
  */
 void MainWindow::activateAllButtons()
 {
-  m_ui->CamStart->setEnabled(true);
-  m_ui->TrackerStart->setEnabled(true);
-  m_ui->CamStop->setEnabled(true);
-  m_ui->TrackerStop->setEnabled(true);
 
-  m_ui->OptimizePoses->setEnabled(true);
-  m_ui->CreateMesh->setEnabled(true);
-  m_ui->SegmentObject->setEnabled(true);
-  m_ui->SavePointClouds->setEnabled(true);
-  m_ui->SaveTrackerModel->setEnabled(true);
-  m_ui->undoOptimize->setEnabled(true);
-  m_ui->okSegmentation->setEnabled(true);
-  m_ui->OptimizeObject->setEnabled(true);
-  m_ui->ResetTracker->setEnabled(true);
-  m_ui->setROI->setEnabled(true);
-  m_ui->ActivateROI->setEnabled(true);
-  m_ui->ResetROI->setEnabled(true);
-  m_ui->SessionAdd->setEnabled(true);
-  m_ui->SessionAlign->setEnabled(true);
-  m_ui->SessionClear->setEnabled(true);
-  m_ui->SessionOptimize->setEnabled(true);
 }
 
 /**
@@ -262,27 +248,7 @@ void MainWindow::activateAllButtons()
  */
 void MainWindow::deactivateAllButtons()
 {
-  m_ui->CamStart->setEnabled(false);
-  m_ui->TrackerStart->setEnabled(false);
-  m_ui->CamStop->setEnabled(false);
-  m_ui->TrackerStop->setEnabled(false);
 
-  m_ui->OptimizePoses->setEnabled(false);
-  m_ui->CreateMesh->setEnabled(true);
-  m_ui->SegmentObject->setEnabled(false);
-  m_ui->SavePointClouds->setEnabled(false);
-  m_ui->SaveTrackerModel->setEnabled(false);
-  m_ui->undoOptimize->setEnabled(false);
-  m_ui->okSegmentation->setEnabled(false);
-  m_ui->OptimizeObject->setEnabled(false);
-  m_ui->ResetTracker->setEnabled(false);
-  m_ui->setROI->setEnabled(false);
-  m_ui->ActivateROI->setEnabled(false);
-  m_ui->ResetROI->setEnabled(false);
-  m_ui->SessionAdd->setEnabled(false);
-  m_ui->SessionAlign->setEnabled(false);
-  m_ui->SessionClear->setEnabled(false);
-  m_ui->SessionOptimize->setEnabled(false);
 }
 
 /**
@@ -290,26 +256,7 @@ void MainWindow::deactivateAllButtons()
  */
 void MainWindow::activateTrackingButtons()
 {
-  m_ui->CamStart->setEnabled(true);
-  m_ui->TrackerStart->setEnabled(true);
-  m_ui->CamStop->setEnabled(true);
-  m_ui->TrackerStop->setEnabled(true);
 
-  m_ui->OptimizePoses->setEnabled(false);
-  m_ui->SegmentObject->setEnabled(false);
-  m_ui->SavePointClouds->setEnabled(false);
-  m_ui->SaveTrackerModel->setEnabled(false);
-  m_ui->undoOptimize->setEnabled(false);
-  m_ui->okSegmentation->setEnabled(false);
-  m_ui->OptimizeObject->setEnabled(false);
-  m_ui->ResetTracker->setEnabled(false);
-  //m_ui->setROI->setEnabled(false);
-  //m_ui->ActivateROI->setEnabled(false);
-  //m_ui->ResetROI->setEnabled(false);
-  m_ui->SessionAdd->setEnabled(false);
-  m_ui->SessionAlign->setEnabled(false);
-  m_ui->SessionClear->setEnabled(false);
-  m_ui->SessionOptimize->setEnabled(false);
 
   if (bbox_active) m_glviewer->drawBoundingBox(true);
 }
@@ -319,26 +266,7 @@ void MainWindow::activateTrackingButtons()
  */
 void MainWindow::activateModellingButtons()
 {
-  m_ui->CamStart->setEnabled(false);
-  m_ui->TrackerStart->setEnabled(false);
-  m_ui->CamStop->setEnabled(false);
-  m_ui->TrackerStop->setEnabled(false);
 
-  m_ui->OptimizePoses->setEnabled(true);
-  m_ui->SegmentObject->setEnabled(true);
-  m_ui->SavePointClouds->setEnabled(true);
-  m_ui->SaveTrackerModel->setEnabled(true);
-  m_ui->undoOptimize->setEnabled(true);
-  m_ui->okSegmentation->setEnabled(true);
-  m_ui->OptimizeObject->setEnabled(true);
-  m_ui->ResetTracker->setEnabled(true);
-  //m_ui->setROI->setEnabled(true);
-  //m_ui->ActivateROI->setEnabled(true);
-  //m_ui->ResetROI->setEnabled(true);
-  m_ui->SessionAdd->setEnabled(true);
-  m_ui->SessionAlign->setEnabled(true);
-  m_ui->SessionClear->setEnabled(true);
-  m_ui->SessionOptimize->setEnabled(true);
 }
 
 /**
@@ -346,24 +274,17 @@ void MainWindow::activateModellingButtons()
  */
 void MainWindow::setStartVis()
 {
-  m_ui->ShowImage->setChecked(true);
-  m_ui->ShowDepthMask->setChecked(true);
-  m_ui->ShowCameras->setChecked(false);
-  m_ui->ShowPointCloud->setChecked(false);
-  m_ui->ShowObjectModel->setChecked(false);
-
-  m_glviewer->showImage(m_ui->ShowImage->isChecked());
-  m_glviewer->showCameras(m_ui->ShowCameras->isChecked());
-  m_glviewer->showCloud(m_ui->ShowPointCloud->isChecked());
-  m_glviewer->showObject(m_ui->ShowObjectModel->isChecked());
-  m_sensor->showDepthMask(m_ui->ShowDepthMask->isChecked());
-
   m_glviewer->resetView();
 }
 
 void MainWindow::printStatus(const std::string &_txt)
 {
   m_ui->statusLabel->setText(_txt.c_str());
+}
+
+void MainWindow::activate_start_modelling()
+{
+    m_ui->StartModelling->setEnabled(true);
 }
 
 void MainWindow::on_actionPreferences_triggered()
@@ -413,6 +334,9 @@ void MainWindow::on_TrackerStart_clicked()
 
 void MainWindow::on_StartModelling_clicked()
 {
+    m_ui->StartModelling->setEnabled(false);
+    m_ui->FinishModelling->setEnabled(true);
+
     if (!m_sensor->isRunning()) setStartVis();
 
     m_sensor->startTracker(0);
@@ -423,6 +347,9 @@ void MainWindow::on_StartModelling_clicked()
 
 void MainWindow::on_FinishModelling_clicked()
 {
+    m_ui->StartModelling->setEnabled(false);
+    m_ui->FinishModelling->setEnabled(false);
+
     m_sensor->stop();
     m_glviewer->drawBoundingBox(false);
     m_ui->statusLabel->setText("Status: Modelling finished. Post processing started, be pacient...");
@@ -458,8 +385,12 @@ void MainWindow::finishedOptimizeCameras(int num_cameras)
     (void)num_cameras;
   //std::string txt = std::string("Status: Optimized ")+v4r::toString(num_cameras,0)+std::string(" cameras");
   //m_ui->statusLabel->setText(txt.c_str());
-
-  activateAllButtons();
+    m_glviewer->showImage(true);
+    m_glviewer->showCameras(false);
+    m_glviewer->showCloud(false);
+    m_glviewer->showObject(false);
+    m_glviewer->segmentObject(false);
+    m_sensor->showDepthMask(false);
 
   /// Segmentation: assumption: All areas are right due to ROI
   // stop camera otherwise it will occupy the window
@@ -469,17 +400,14 @@ void MainWindow::finishedOptimizeCameras(int num_cameras)
   num_clouds = m_sensor->getClouds()->size();
   m_segmentation->setData(m_sensor->getCameras(), m_sensor->getClouds() );
 
-  setStartVis();
-
-  m_glviewer->segmentObject(true);
-
   ///former step which was performed after clicking Object:Optimize
-  m_glviewer->segmentObject(false);
+
 //  m_segmentation->finishSegmentation();
   if (!m_segmentation->optimizeMultiview())
   {
     finishedObjectSegmentation();
   }
+
 }
 
 void MainWindow::on_CreateMesh_clicked()
@@ -523,10 +451,17 @@ void MainWindow::finishedCreateMesh()
           ok = m_segmentation->savePointClouds(m_params->get_rgbd_path(), model_name.toStdString());
 
 
-          if (ok) m_ui->statusLabel->setText("Status: Saved model");
+          if (ok) m_ui->statusLabel->setText("Status: Model saved");
           else m_ui->statusLabel->setText("Status: No data available!");
       }
   }
+
+  m_glviewer->showImage(false);
+  m_glviewer->showCameras(false);
+  m_glviewer->showCloud(false);
+  m_glviewer->showObject(true);
+  m_glviewer->segmentObject(false);
+  m_sensor->showDepthMask(false);
 
 }
 
@@ -547,13 +482,8 @@ void MainWindow::on_SegmentObject_clicked()
   idx_seg = 0;
   num_clouds = m_sensor->getClouds()->size();
   m_segmentation->setData(m_sensor->getCameras(), m_sensor->getClouds() );
-  m_ui->imBackward->setEnabled(true);
-  m_ui->imForward->setEnabled(true);
 
   deactivateAllButtons();
-
-  m_ui->okSegmentation->setEnabled(true);
-  m_ui->OptimizeObject->setEnabled(true);
 
   setStartVis();
 
@@ -566,7 +496,6 @@ void MainWindow::on_okSegmentation_clicked()
 {
   m_ui->statusLabel->setText("Status: Postprocessing the object...");
   m_glviewer->segmentObject(false);
-  m_ui->okSegmentation->setEnabled(false);
   m_segmentation->finishSegmentation();
 }
 
@@ -578,27 +507,19 @@ void MainWindow::finishedObjectSegmentation()
   m_glviewer->drawBoundingBox(false);
   m_segmentation->drawObjectCloud();
 
-  activateAllButtons();
-
-  m_ui->ShowImage->setChecked(false);
-  m_ui->ShowDepthMask->setChecked(false);
-  m_ui->ShowCameras->setChecked(false);
-  m_ui->ShowPointCloud->setChecked(false);
-  m_ui->ShowObjectModel->setChecked(true);
-
-  m_glviewer->showImage(m_ui->ShowImage->isChecked());
-  m_glviewer->showCameras(m_ui->ShowCameras->isChecked());
-  m_glviewer->showCloud(m_ui->ShowPointCloud->isChecked());
-  m_glviewer->showObject(m_ui->ShowObjectModel->isChecked());
-  m_sensor->showDepthMask(m_ui->ShowDepthMask->isChecked());
   m_glviewer->resetView(-1.);
 
-  m_ui->imBackward->setEnabled(false);
-  m_ui->imForward->setEnabled(false);
   m_ui->statusLabel->setText("Status: Finised segmentation");
 
   ///Calculate Mesh
   m_mesh->calculateMesh(m_segmentation->getModelCloud());
+
+  m_glviewer->showImage(false);
+  m_glviewer->showCameras(false);
+  m_glviewer->showCloud(false);
+  m_glviewer->showObject(true);
+  m_glviewer->segmentObject(false);
+  m_sensor->showDepthMask(false);
 
 }
 
@@ -728,22 +649,22 @@ void MainWindow::on_ResetView_clicked()
 
 void MainWindow::on_ShowImage_clicked()
 {
-  m_glviewer->showImage(m_ui->ShowImage->isChecked());
+
 }
 
 void MainWindow::on_ShowCameras_clicked()
 {
-  m_glviewer->showCameras(m_ui->ShowCameras->isChecked());
+
 }
 
 void MainWindow::on_ShowPointCloud_clicked()
 {
-  m_glviewer->showCloud(m_ui->ShowPointCloud->isChecked());
+
 }
 
 void MainWindow::on_ShowObjectModel_clicked()
 {
-  m_glviewer->showObject(m_ui->ShowObjectModel->isChecked());
+
 }
 
 void MainWindow::on_ResetTracker_clicked()
@@ -754,7 +675,7 @@ void MainWindow::on_ResetTracker_clicked()
 
 void MainWindow::on_ShowDepthMask_clicked()
 {
-  m_sensor->showDepthMask(m_ui->ShowDepthMask->isChecked());
+
 }
 
 void MainWindow::on_setROI_clicked()
@@ -785,14 +706,10 @@ void MainWindow::on_ResetROI_clicked()
   m_segmentation->activateROI(false);
 }
 
-
-
 void MainWindow::on_OptimizeObject_clicked()
 {
   m_ui->statusLabel->setText("Status: Postprocessing the object...");
-  m_glviewer->segmentObject(false);
-  m_ui->okSegmentation->setEnabled(false);
-  m_ui->OptimizeObject->setEnabled(false);
+
   if (!m_segmentation->optimizeMultiview())
   {
     finishedObjectSegmentation();
@@ -812,7 +729,6 @@ void MainWindow::on_SessionAdd_clicked()
 
 void MainWindow::on_SessionAlign_clicked()
 {
-  m_ui->SessionOptimize->setEnabled(false);
   m_multi_session->alignSequences();
 }
 
@@ -824,7 +740,7 @@ void MainWindow::on_SessionClear_clicked()
 
 void MainWindow::finishedAlignment(bool ok)
 {
-  m_ui->SessionOptimize->setEnabled(true);
+
   if (ok) have_multi_session = true;
 }
 

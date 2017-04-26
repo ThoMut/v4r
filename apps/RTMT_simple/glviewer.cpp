@@ -464,6 +464,7 @@ void GLViewer::mousePressEvent(QMouseEvent* event)
   else if (m_select_roi)
   {
     emit select_roi(m_last_point_2d.x(),m_last_point_2d.y());
+    emit activate_start_modelling();
     m_select_roi = false;
   }
 

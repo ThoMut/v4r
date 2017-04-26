@@ -51,7 +51,6 @@
 #include <QGraphicsView>
 #endif
 
-
 class GLGraphicsView : public QGraphicsView
 {
   Q_OBJECT
@@ -61,7 +60,6 @@ signals:
   void mouse_pressed(QMouseEvent *event);
   void key_pressed(QKeyEvent *event);
   void wheel_event(QWheelEvent *event);
-
 
 public:
   GLGraphicsView(QWidget* widget=0) : QGraphicsView(widget) { }
@@ -85,7 +83,6 @@ public:
   {
     emit wheel_event(event);
   }
-
 
 };
 
@@ -112,6 +109,7 @@ public:
 signals:
   void segment_image(int x, int y);
   void select_roi(int x, int y);
+  void activate_start_modelling();
 
 public slots:
   void draw();

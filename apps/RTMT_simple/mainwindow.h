@@ -119,6 +119,7 @@ private slots:
 
 public slots:
   void printStatus(const std::string &_txt);
+  void activate_start_modelling();
 
 private:
 //  void make_extension(std::string& filename, std::string ext);
