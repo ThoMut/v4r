@@ -106,6 +106,11 @@ public:
     }
 
     /**
+     * @brief visualize simple
+     */
+    void visualize_simple() const;
+
+    /**
      * @brief visualize
      */
     void visualize() const;

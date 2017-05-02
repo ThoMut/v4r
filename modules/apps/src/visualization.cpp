@@ -132,6 +132,102 @@ ObjectRecognitionVisualizer<PointT>::keyboardEventOccurred (const pcl::visualiza
 
 template<typename PointT>
 void
+ObjectRecognitionVisualizer<PointT>::visualize_simple() const
+{
+    if(!vis_)
+    {
+        vis_.reset(new pcl::visualization::PCLVisualizer("single-view recognition results"));
+        vis_->createViewPort(0,0,0.5,1, vp1a_);
+        vis_->createViewPort(0.5, 0, 1, 1,vp3_);
+    }
+
+    vis_->removeAllShapes();
+    std::stringstream verified_hyp_ss; verified_hyp_ss << "verified hypotheses (" << verified_object_hypotheses_.size() << ")";
+    vis_->addText("input cloud", 10, 10, 20, 1, 1, 1, "input_test", vp1a_);
+
+    vis_->addText(verified_hyp_ss.str(), 10, 10, 20, 0, 0, 0, "verified hypotheses_text", vp3_);
+
+    vis_->removeAllPointClouds();
+    vis_->removeAllPointClouds(vp1a_);
+    vis_->removeAllPointClouds(vp3_);
+
+    typename pcl::PointCloud<PointT>::Ptr vis_cloud (new pcl::PointCloud<PointT>);
+    pcl::copyPointCloud(*cloud_, *vis_cloud);
+    vis_cloud->sensor_origin_ = Eigen::Vector4f::Zero();
+//    Eigen::Vector4f origin(0,0,1,0);
+//    vis_cloud->sensor_origin_ = origin;
+    vis_cloud->sensor_orientation_ = Eigen::Quaternionf::Identity();
+
+
+//    if(normals_)
+//        vis_->addPointCloudNormals<PointT,pcl::Normal>( processed_cloud_, normals_, 50, 0.02f, "normals", vp1b_);
+
+#if PCL_VERSION >= 100800
+    vis_->removeAllCoordinateSystems(vp2_);
+    vis_->removeAllCoordinateSystems(vp2b_);
+    vis_->removeAllCoordinateSystems(vp3_);
+        for(size_t co_id=0; co_id<coordinate_axis_ids_.size(); co_id++)
+            vis_->removeCoordinateSystem( coordinate_axis_ids_[co_id] );
+#endif
+        coordinate_axis_ids_.clear();
+
+    if(vis_param_->no_text_)
+        vis_->setBackgroundColor(1,1,1,vp1a_);
+    else
+        vis_->setBackgroundColor(.0f, .0f, .0f, vp1a_);
+
+    for(size_t i=0; i<verified_object_hypotheses_.size(); i++)
+    {
+        const ObjectHypothesis<PointT> &oh = *verified_object_hypotheses_[i];
+        bool found_model;
+        typename Model<PointT>::ConstPtr m = m_db_->getModelById(oh.class_id_, oh.model_id_, found_model);
+        const std::string model_id = m->id_.substr(0, m->id_.length() - 4);
+        std::stringstream model_label;
+        model_label << model_id << "_verified_" << i;
+        typename pcl::PointCloud<PointT>::Ptr model_aligned ( new pcl::PointCloud<PointT>() );
+        typename pcl::PointCloud<PointT>::ConstPtr model_cloud = m->getAssembled(3);
+        pcl::transformPointCloud( *model_cloud, *model_aligned, oh.transform_);
+        vis_->addPointCloud(model_aligned, model_label.str(), vp3_);
+
+#if PCL_VERSION >= 100800
+        Eigen::Matrix4f tf_tmp = oh.transform_;
+        Eigen::Matrix3f rot_tmp  = tf_tmp.block<3,3>(0,0);
+        Eigen::Vector3f trans_tmp = tf_tmp.block<3,1>(0,3);
+        Eigen::Affine3f affine_trans;
+        affine_trans.fromPositionOrientationScale(trans_tmp, rot_tmp, Eigen::Vector3f::Ones());
+        std::stringstream co_id; co_id << i << "vp3";
+        vis_->addCoordinateSystem(0.2f, affine_trans, co_id.str(), vp3_);
+        coordinate_axis_ids_.push_back(co_id.str());
+#endif
+    }
+
+    vis_->addPointCloud(vis_cloud, "input", vp1a_);
+    pcl::visualization::PointCloudColorHandlerCustom<PointT> gray3 (vis_cloud, 128, 128, 128);
+    vis_->addPointCloud(vis_cloud, gray3, "input_vp3", vp3_);
+    vis_->setPointCloudRenderingProperties( pcl::visualization::PCL_VISUALIZER_OPACITY, 0.2, "input_vp3");
+    //vis_->addPointCloud(kp_cloud_scene, "kp_cloud_scene", vp1a_);
+    //vis_->setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 15, "kp_cloud_scene");
+    //vis_->addPointCloud(kp_cloud_scene2, "kp_cloud_scene2", vp1a_);
+    //vis_->setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 15, "kp_cloud_scene2");
+    vis_->setPointCloudRenderingProperties( pcl::visualization::PCL_VISUALIZER_OPACITY, 0, "kp_cloud_scene2");
+    vis_->setBackgroundColor(1.f, 1.f, 1.f, vp3_);
+
+//    if( kp_cloud_scene && !kp_cloud_scene->points.empty() )
+//    {
+//        pcl::PointCloud<pcl::PointXYZ>::Ptr kp_cloud_scene_xyz (new pcl::PointCloud<pcl::PointXYZ>);
+//        pcl::copyPointCloud( *kp_cloud_scene, *kp_cloud_scene_xyz );
+//        kdtree_.reset( new pcl::KdTreeFLANN<pcl::PointXYZ>);
+//        kdtree_->setInputCloud( kp_cloud_scene_xyz );
+//    }
+
+    //vis_->addCoordinateSystem(0.5);
+    vis_->setCameraPosition(0, 0, 0, 0, 0, 1, 0, -1, 0);
+    vis_->resetCamera();
+    vis_->spin();
+}
+
+template<typename PointT>
+void
 ObjectRecognitionVisualizer<PointT>::visualize() const
 {
     corrs_.clear();
@@ -159,7 +255,7 @@ ObjectRecognitionVisualizer<PointT>::visualize() const
 
     vis_->removeAllShapes();
     std::stringstream generated_hyp_ss; generated_hyp_ss << "genereated hypotheses (" << gen_hyps << ")";
-    std::stringstream verified_hyp_ss; verified_hyp_ss << "verified hypotheses (" << verified_object_hypotheses_.size() << ")";
+    std::stringstream verified_hyp_ss; verified_hyp_ss << "recognized objects (" << verified_object_hypotheses_.size() << ")";
     vis_->addText("input cloud", 10, 10, 20, 1, 1, 1, "input_test", vp1a_);
 
     if(processed_cloud_)
