@@ -17,7 +17,7 @@
 #include <QLineEdit>
 #include "or_evaluator.h"
 #include <pcl/filters/voxel_grid.h>
-#include <v4r/recognition/model_only_source.h>
+//#include <v4r/recognition/model_only_source.h>
 #include <v4r/common/miscellaneous.h>
 #endif
 

@@ -8,6 +8,7 @@
 #include <pcl/point_types.h>
 #include <pcl/io/pcd_io.h>
 #include <v4r/io/filesystem.h>
+#include <string>
 
 namespace po = boost::program_options;
 
@@ -23,7 +24,7 @@ main (int argc, char ** argv)
     po::options_description desc("Single-View Object Instance Recognizer\n======================================\n**Allowed options");
     desc.add_options()
             ("help,h", "produce help message")
-            ("test_file,t", po::value<std::string>(&test_file)->required(), "Directory with test scenes stored as point clouds (.pcd). The camera pose is taken directly from the pcd header fields \"sensor_orientation_\" and \"sensor_origin_\" (if the test directory contains subdirectories, each subdirectory is considered as seperate sequence for multiview recognition)")
+            ("test_folder,t", po::value<std::string>(&test_file)->required(), "Directory with test scenes stored as point clouds (.pcd). The camera pose is taken directly from the pcd header fields \"sensor_orientation_\" and \"sensor_origin_\" (if the test directory contains subdirectories, each subdirectory is considered as seperate sequence for multiview recognition)")
             ("recognizer_config", po::value<std::string>(&recognizer_config)->default_value(recognizer_config), "Config XML of the multi-pipeline recognizer")
             ("verbosity", po::value<int>(&verbosity)->default_value(verbosity), "set verbosity level for output (<0 minimal output)")
             ;
@@ -39,19 +40,27 @@ main (int argc, char ** argv)
     v4r::apps::ObjectRecognizer<PT> recognizer (param);
     recognizer.initialize(to_pass_further);
 
-    LOG(INFO) << "Recognizing file " << test_file;
-    pcl::PointCloud<PT>::Ptr cloud(new pcl::PointCloud<PT>());
-    pcl::io::loadPCDFile( test_file, *cloud);
-
-    //reset view point - otherwise this messes up PCL's visualization (this does not affect recognition results)
-    cloud->sensor_orientation_ = Eigen::Quaternionf::Identity();
-    cloud->sensor_origin_ = Eigen::Vector4f::Zero(4);
-
-    std::vector<typename v4r::ObjectHypothesis<PT>::Ptr > verified_hypotheses = recognizer.recognize(cloud);
-
-    for ( const v4r::ObjectHypothesis<PT>::Ptr &voh : verified_hypotheses )
+    for(int i=1; i<15; ++i)
     {
-        std::cout << voh->model_id_ << std::endl;
+        if(i==10) {continue;}
+
+        std::string test_file1 = test_file;
+
+        test_file1.append("photo" + std::to_string(i) + ".pcd");
+        LOG(INFO) << "Recognizing file " << test_file1;
+        pcl::PointCloud<PT>::Ptr cloud(new pcl::PointCloud<PT>());
+        pcl::io::loadPCDFile( test_file1, *cloud);
+
+        //reset view point - otherwise this messes up PCL's visualization (this does not affect recognition results)
+        cloud->sensor_orientation_ = Eigen::Quaternionf::Identity();
+        cloud->sensor_origin_ = Eigen::Vector4f::Zero(4);
+
+        std::vector<typename v4r::ObjectHypothesis<PT>::Ptr > verified_hypotheses = recognizer.recognize(cloud);
+
+        for ( const v4r::ObjectHypothesis<PT>::Ptr &voh : verified_hypotheses )
+        {
+            std::cout << voh->model_id_ << std::endl;
+        }
     }
 }
 

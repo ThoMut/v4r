@@ -115,8 +115,9 @@ main (int argc, char ** argv)
 
             // update and save config
             v4r::io::removeDir("./cfg");
-            v4r::io::copyDir("/home/thomas/default_cfg", "cfg");
+            v4r::io::copyDir("/home/thomas/DA_offline/v4r_F_add_mesh_GUI/bin/default_config", "cfg");
 
+            std::cout << "Checkpoint 1" << std::endl;
             of_param << counter-1 << ": " << std::endl;
             for(const XMLChange &chg : eval_changes)
             {
@@ -153,6 +154,7 @@ main (int argc, char ** argv)
 //                to_pass_further_tmp.erase( remove(to_pass_further_tmp.begin(), to_pass_further_tmp.end(), "--retrain"), to_pass_further_tmp.end());
 //                continue;
 //            }
+
 
             v4r::apps::ObjectRecognizerParameter or_param (recognizer_config);
             v4r::apps::ObjectRecognizer<PT> recognizer(or_param);
@@ -235,7 +237,7 @@ main (int argc, char ** argv)
             e.setGt_dir(gt_dir);
             e.setOut_dir(out_dir_eval);
             e.setUse_generated_hypotheses(true);
-    //        e.setVisualize(true);
+            e.setVisualize(true);
             float recognition_rate = e.compute_recognition_rate_over_occlusion();
             size_t tp, fp, fn;
             e.compute_recognition_rate(tp, fp, fn);
@@ -254,6 +256,10 @@ main (int argc, char ** argv)
             LOG(WARNING) << "RECOGNITION RATE: " << recognition_rate << ", median time: " << median_time_ms
                       << ", tp: " << tp << ", fp: " << fp << ", fn: " << fn
                       << ", precision: " << precision << ", recall: " << recall << ", fscore: " << fscore;
+
+            std:cout << "RECOGNITION RATE: " << recognition_rate << ", median time: " << median_time_ms
+                      << ", tp: " << tp << ", fp: " << fp << ", fn: " << fn
+                      << ", precision: " << precision << ", recall: " << recall << ", fscore: " << fscore << std::endl;
 
             of_results << counter-1 << " " << recognition_rate << " " << median_time_ms << " " << fp << " " << tp << " " << fn << " " << precision << " " << recall << " " << fscore << std::endl;
 

@@ -364,8 +364,11 @@ RecognitionEvaluator::compute_recognition_rate (size_t &total_tp, size_t &total_
     total_fp = 0;
     total_fn = 0;
 
+    std::cout << "Checkpoint 1" << std::endl;
+
     for( const std::string anno_file : annotation_files )
     {
+        std::cout << "Checkpoint 2" << std::endl;
         bf::path gt_path = gt_dir;
         gt_path /= anno_file;
 
@@ -378,6 +381,7 @@ RecognitionEvaluator::compute_recognition_rate (size_t &total_tp, size_t &total_
 
         if(!v4r::io::existsFile(rec_path.string()))
             continue;
+
 
         std::map<std::string, std::vector<Hypothesis> > gt_hyps = readHypothesesFromFile( gt_path.string() );
         std::map<std::string, std::vector<Hypothesis> > rec_hyps = readHypothesesFromFile( rec_path.string() );
@@ -565,6 +569,8 @@ RecognitionEvaluator::compute_recognition_rate (size_t &total_tp, size_t &total_
             vis_.reset();
         }
     }
+    std::cout << "Checkpoint 3" << std::endl;
+
     of.close();
 }
 

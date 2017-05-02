@@ -16,7 +16,7 @@
 #include <pcl/registration/icp.h>
 #include <vtkRenderWindow.h>
 #include <pcl/common/angles.h>
-#include <v4r/recognition//voxel_based_correspondence_estimation.h>
+//#include <v4r/recognition//voxel_based_correspondence_estimation.h>
 #include <v4r/io/filesystem.h>
 #include <v4r/io/eigen.h>
 #include <v4r/common/pcl_utils.h>
