@@ -205,11 +205,6 @@ ObjectRecognitionVisualizer<PointT>::visualize_simple() const
     pcl::visualization::PointCloudColorHandlerCustom<PointT> gray3 (vis_cloud, 128, 128, 128);
     vis_->addPointCloud(vis_cloud, gray3, "input_vp3", vp3_);
     vis_->setPointCloudRenderingProperties( pcl::visualization::PCL_VISUALIZER_OPACITY, 0.2, "input_vp3");
-    //vis_->addPointCloud(kp_cloud_scene, "kp_cloud_scene", vp1a_);
-    //vis_->setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 15, "kp_cloud_scene");
-    //vis_->addPointCloud(kp_cloud_scene2, "kp_cloud_scene2", vp1a_);
-    //vis_->setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 15, "kp_cloud_scene2");
-    vis_->setPointCloudRenderingProperties( pcl::visualization::PCL_VISUALIZER_OPACITY, 0, "kp_cloud_scene2");
     vis_->setBackgroundColor(1.f, 1.f, 1.f, vp3_);
 
 //    if( kp_cloud_scene && !kp_cloud_scene->points.empty() )

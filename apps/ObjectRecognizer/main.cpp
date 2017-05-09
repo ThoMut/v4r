@@ -61,6 +61,10 @@ main (int argc, char ** argv)
         {
             std::cout << voh->model_id_ << std::endl;
         }
+
     }
+
+     //add change detection
+
 }
 

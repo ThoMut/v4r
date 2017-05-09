@@ -117,7 +117,7 @@ main (int argc, char ** argv)
             v4r::io::removeDir("./cfg");
             v4r::io::copyDir("/home/thomas/DA_offline/v4r_F_add_mesh_GUI/bin/default_config", "cfg");
 
-            std::cout << "Checkpoint 1" << std::endl;
+
             of_param << counter-1 << ": " << std::endl;
             for(const XMLChange &chg : eval_changes)
             {
@@ -228,7 +228,7 @@ main (int argc, char ** argv)
                         f.close();
                     }
                 }
-            }
+ }
 
             v4r::apps::RecognitionEvaluator e;
             e.setModels_dir(recognizer.getModelsDir());
@@ -241,6 +241,7 @@ main (int argc, char ** argv)
             float recognition_rate = e.compute_recognition_rate_over_occlusion();
             size_t tp, fp, fn;
             e.compute_recognition_rate(tp, fp, fn);
+
 
             float median_time_ms = std::numeric_limits<float>::max();
             std::sort(elapsed_time.begin(), elapsed_time.end());

@@ -365,6 +365,7 @@ RecognitionEvaluator::compute_recognition_rate (size_t &total_tp, size_t &total_
     total_fn = 0;
 
     std::cout << "Checkpoint 1" << std::endl;
+    std::cout << "path" << gt_dir << std::endl;
 
     for( const std::string anno_file : annotation_files )
     {
