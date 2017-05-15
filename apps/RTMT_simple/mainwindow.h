@@ -76,11 +76,23 @@ private slots:
   void on_actionPreferences_triggered();
   void on_actionExit_triggered();
 
+  void on_StartModelling_clicked();
+  void on_FinishModelling_clicked();
+
+  void finishedOptimizeCameras(int num_cameras);
+  void finishedCreateMesh();
+
+  void finishedObjectSegmentation();
+
+  /*
+   *
+  void finishedStoreTrackingModel();
+  void finishedAlignment(bool ok);
+
   void on_CamStart_clicked();
   void on_CamStop_clicked();
   void on_TrackerStart_clicked();
-  void on_StartModelling_clicked();
-  void on_FinishModelling_clicked();
+
   void on_TrackerStop_clicked();
   void on_OptimizePoses_clicked();
   void on_CreateMesh_clicked();
@@ -100,12 +112,6 @@ private slots:
   void on_imForward_clicked();
   void on_imBackward_clicked();
 
-  void finishedOptimizeCameras(int num_cameras);
-  void finishedCreateMesh();
-  void finishedStoreTrackingModel();
-  void finishedObjectSegmentation();
-  void finishedAlignment(bool ok);
-
   void on_ShowDepthMask_clicked();
   void on_setROI_clicked();
   void on_ActivateROI_clicked();
@@ -116,7 +122,7 @@ private slots:
   void on_SessionClear_clicked();
 
   void on_SessionOptimize_clicked();
-
+*/
 public slots:
   void printStatus(const std::string &_txt);
   void activate_start_modelling();

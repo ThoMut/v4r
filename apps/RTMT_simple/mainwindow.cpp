@@ -161,14 +161,14 @@ MainWindow::MainWindow(QWidget *parent) :
           this, SLOT(finishedObjectSegmentation()));
 
   // StoreTrackingModel
-  connect(m_store_tracking_model, SIGNAL(printStatus(const std::string)),
-          this, SLOT(printStatus(const std::string)));
-  connect(m_store_tracking_model, SIGNAL(finishedStoreTrackingModel()),
-          this, SLOT(finishedStoreTrackingModel()));
-  connect(m_segmentation, SIGNAL(set_object_base_transform(const Eigen::Matrix4f)),
-          m_store_tracking_model, SLOT(set_object_base_transform(const Eigen::Matrix4f)));
-  connect(m_params, SIGNAL(set_cb_param(bool, float)),
-          m_store_tracking_model, SLOT(set_cb_param(bool, float)));
+//  connect(m_store_tracking_model, SIGNAL(printStatus(const std::string)),
+//          this, SLOT(printStatus(const std::string)));
+//  connect(m_store_tracking_model, SIGNAL(finishedStoreTrackingModel()),
+//          this, SLOT(finishedStoreTrackingModel()));
+//  connect(m_segmentation, SIGNAL(set_object_base_transform(const Eigen::Matrix4f)),
+//          m_store_tracking_model, SLOT(set_object_base_transform(const Eigen::Matrix4f)));
+//  connect(m_params, SIGNAL(set_cb_param(bool, float)),
+//          m_store_tracking_model, SLOT(set_cb_param(bool, float)));
 
   // bundle adjustment
   connect(m_ba, SIGNAL(update_model_cloud(const boost::shared_ptr< Sensor::AlignedPointXYZRGBVector >)),
@@ -189,14 +189,15 @@ MainWindow::MainWindow(QWidget *parent) :
           this, SLOT(finishedCreateMesh()));
 
   // multi session
-  connect(m_multi_session, SIGNAL(finishedAlignment(bool)),
-          this, SLOT(finishedAlignment(bool)));
-  connect(m_multi_session, SIGNAL(printStatus(const std::string)),
-          this, SLOT(printStatus(const std::string)));
-  connect(m_multi_session, SIGNAL(update_model_cloud(const boost::shared_ptr< Sensor::AlignedPointXYZRGBVector >)),
-          m_glviewer, SLOT(update_model_cloud(const boost::shared_ptr< Sensor::AlignedPointXYZRGBVector >)));
-  connect(m_multi_session, SIGNAL(update_visualization()),
-          m_glviewer, SLOT(update_visualization()));
+//  connect(m_multi_session, SIGNAL(finishedAlignment(bool)),
+//          this, SLOT(finishedAlignment(bool)));
+//  connect(m_multi_session, SIGNAL(printStatus(const std::string)),
+//          this, SLOT(printStatus(const std::string)));
+//  connect(m_multi_session, SIGNAL(update_model_cloud(const boost::shared_ptr< Sensor::AlignedPointXYZRGBVector >)),
+//          m_glviewer, SLOT(update_model_cloud(const boost::shared_ptr< Sensor::AlignedPointXYZRGBVector >)));
+//  connect(m_multi_session, SIGNAL(update_visualization()),
+//          m_glviewer, SLOT(update_visualization()));
+
 
   connect(m_glviewer, SIGNAL(activate_start_modelling()),
           this, SLOT(activate_start_modelling()));
@@ -287,51 +288,6 @@ void MainWindow::activate_start_modelling()
     m_ui->StartModelling->setEnabled(true);
 }
 
-void MainWindow::on_actionPreferences_triggered()
-{
-  m_params->show();
-}
-
-
-void MainWindow::on_actionExit_triggered()
-{
-  QApplication::exit();
-}
-
-void MainWindow::on_CamStart_clicked()
-{
-  activateTrackingButtons();
-  setStartVis();
-
-  m_sensor->start(0);
-  //m_glviewer->drawBoundingBox(false);
-  m_ui->statusLabel->setText("Status: Started camera");
-}
-
-void MainWindow::on_CamStop_clicked()
-{
-  m_sensor->stop();
-
-  activateAllButtons();
-
-  m_glviewer->drawBoundingBox(false);
-
-  m_ui->statusLabel->setText("Status: Stopped camera");
-}
-
-void MainWindow::on_TrackerStart_clicked()
-{
-  activateTrackingButtons();
-
-  if (!m_sensor->isRunning()) setStartVis();
-
-  m_sensor->startTracker(0);
-
-
-  //m_glviewer->drawBoundingBox(false);
-  m_ui->statusLabel->setText("Status: Started tracker");
-}
-
 void MainWindow::on_StartModelling_clicked()
 {
     m_ui->StartModelling->setEnabled(false);
@@ -356,67 +312,6 @@ void MainWindow::on_FinishModelling_clicked()
 
     ///optimice Pose
     m_ba->optimizeCamStructProj(m_sensor->getModel(),m_sensor->getTrajectory(),m_sensor->getClouds(),m_sensor->getAlignedCloud());
-}
-
-void MainWindow::on_TrackerStop_clicked()
-{
-  m_sensor->stopTracker();
-
-  activateAllButtons();
-  m_glviewer->drawBoundingBox(false);
-
-  m_ui->statusLabel->setText("Status: Stopped tracker");
-}
-
-void MainWindow::on_OptimizePoses_clicked()
-{
-  //int num_cameras;
-
-  deactivateAllButtons();
-
-  //m_ui->statusLabel->setText("Status: Optimizing camera locations ...");
-  //m_sensor->optimizeCameras(num_cameras);
-  m_ba->optimizeCamStructProj(m_sensor->getModel(),m_sensor->getTrajectory(),m_sensor->getClouds(),m_sensor->getAlignedCloud());
-}
-
-
-void MainWindow::finishedOptimizeCameras(int num_cameras)
-{
-    (void)num_cameras;
-  //std::string txt = std::string("Status: Optimized ")+v4r::toString(num_cameras,0)+std::string(" cameras");
-  //m_ui->statusLabel->setText(txt.c_str());
-    m_glviewer->showImage(true);
-    m_glviewer->showCameras(false);
-    m_glviewer->showCloud(false);
-    m_glviewer->showObject(false);
-    m_glviewer->segmentObject(false);
-    m_sensor->showDepthMask(false);
-
-  /// Segmentation: assumption: All areas are right due to ROI
-  // stop camera otherwise it will occupy the window
-  m_sensor->stop();
-
-  idx_seg = 0;
-  num_clouds = m_sensor->getClouds()->size();
-  m_segmentation->setData(m_sensor->getCameras(), m_sensor->getClouds() );
-
-  ///former step which was performed after clicking Object:Optimize
-
-//  m_segmentation->finishSegmentation();
-  if (!m_segmentation->optimizeMultiview())
-  {
-    finishedObjectSegmentation();
-  }
-
-}
-
-void MainWindow::on_CreateMesh_clicked()
-{
-  deactivateAllButtons();
-
-//  pcl::PointCloud<pcl::PointXYZRGBNormal>::Ptr model_cloud(new pcl::PointCloud<pcl::PointXYZRGBNormal>);
-
-  m_mesh->calculateMesh(m_segmentation->getModelCloud());
 }
 
 void MainWindow::finishedCreateMesh()
@@ -465,6 +360,140 @@ void MainWindow::finishedCreateMesh()
 
 }
 
+/**
+ * @brief MainWindow::finishedObjectSegmentation
+ */
+void MainWindow::finishedObjectSegmentation()
+{
+  m_glviewer->drawBoundingBox(false);
+  m_segmentation->drawObjectCloud();
+
+  m_glviewer->resetView(-1.);
+
+  m_ui->statusLabel->setText("Status: Finised segmentation");
+
+  ///Calculate Mesh
+  m_mesh->calculateMesh(m_segmentation->getModelCloud());
+
+  m_glviewer->showImage(false);
+  m_glviewer->showCameras(false);
+  m_glviewer->showCloud(false);
+  m_glviewer->showObject(true);
+  m_glviewer->segmentObject(false);
+  m_sensor->showDepthMask(false);
+
+}
+
+void MainWindow::finishedOptimizeCameras(int num_cameras)
+{
+    (void)num_cameras;
+  //std::string txt = std::string("Status: Optimized ")+v4r::toString(num_cameras,0)+std::string(" cameras");
+  //m_ui->statusLabel->setText(txt.c_str());
+    m_glviewer->showImage(true);
+    m_glviewer->showCameras(false);
+    m_glviewer->showCloud(false);
+    m_glviewer->showObject(false);
+    m_glviewer->segmentObject(false);
+    m_sensor->showDepthMask(false);
+
+  /// Segmentation: assumption: All areas are right due to ROI
+  // stop camera otherwise it will occupy the window
+  m_sensor->stop();
+
+  idx_seg = 0;
+  num_clouds = m_sensor->getClouds()->size();
+  m_segmentation->setData(m_sensor->getCameras(), m_sensor->getClouds() );
+
+  ///former step which was performed after clicking Object:Optimize
+
+//  m_segmentation->finishSegmentation();
+  if (!m_segmentation->optimizeMultiview())
+  {
+    finishedObjectSegmentation();
+  }
+
+}
+
+void MainWindow::on_actionPreferences_triggered()
+{
+  m_params->show();
+}
+
+void MainWindow::on_actionExit_triggered()
+{
+  QApplication::exit();
+}
+/*
+ *
+void MainWindow::on_CreateMesh_clicked()
+{
+  deactivateAllButtons();
+
+//  pcl::PointCloud<pcl::PointXYZRGBNormal>::Ptr model_cloud(new pcl::PointCloud<pcl::PointXYZRGBNormal>);
+
+  m_mesh->calculateMesh(m_segmentation->getModelCloud());
+}
+
+
+void MainWindow::on_CamStart_clicked()
+{
+  activateTrackingButtons();
+  setStartVis();
+
+  m_sensor->start(0);
+  //m_glviewer->drawBoundingBox(false);
+  m_ui->statusLabel->setText("Status: Started camera");
+}
+
+void MainWindow::on_CamStop_clicked()
+{
+  m_sensor->stop();
+
+  activateAllButtons();
+
+  m_glviewer->drawBoundingBox(false);
+
+  m_ui->statusLabel->setText("Status: Stopped camera");
+}
+
+void MainWindow::on_TrackerStart_clicked()
+{
+  activateTrackingButtons();
+
+  if (!m_sensor->isRunning()) setStartVis();
+
+  m_sensor->startTracker(0);
+
+
+  //m_glviewer->drawBoundingBox(false);
+  m_ui->statusLabel->setText("Status: Started tracker");
+}
+
+
+void MainWindow::on_TrackerStop_clicked()
+{
+  m_sensor->stopTracker();
+
+  activateAllButtons();
+  m_glviewer->drawBoundingBox(false);
+
+  m_ui->statusLabel->setText("Status: Stopped tracker");
+}
+
+void MainWindow::on_OptimizePoses_clicked()
+{
+  //int num_cameras;
+
+  deactivateAllButtons();
+
+  //m_ui->statusLabel->setText("Status: Optimizing camera locations ...");
+  //m_sensor->optimizeCameras(num_cameras);
+  m_ba->optimizeCamStructProj(m_sensor->getModel(),m_sensor->getTrajectory(),m_sensor->getClouds(),m_sensor->getAlignedCloud());
+}
+
+
+
+
 
 void MainWindow::on_undoOptimize_clicked()
 {
@@ -499,29 +528,7 @@ void MainWindow::on_okSegmentation_clicked()
   m_segmentation->finishSegmentation();
 }
 
-/**
- * @brief MainWindow::finishedObjectSegmentation
- */
-void MainWindow::finishedObjectSegmentation()
-{
-  m_glviewer->drawBoundingBox(false);
-  m_segmentation->drawObjectCloud();
 
-  m_glviewer->resetView(-1.);
-
-  m_ui->statusLabel->setText("Status: Finised segmentation");
-
-  ///Calculate Mesh
-  m_mesh->calculateMesh(m_segmentation->getModelCloud());
-
-  m_glviewer->showImage(false);
-  m_glviewer->showCameras(false);
-  m_glviewer->showCloud(false);
-  m_glviewer->showObject(true);
-  m_glviewer->segmentObject(false);
-  m_sensor->showDepthMask(false);
-
-}
 
 void MainWindow::on_imForward_clicked()
 {
@@ -749,5 +756,7 @@ void MainWindow::on_SessionOptimize_clicked()
   if (have_multi_session)
     m_multi_session->optimizeSequences();
 }
+
+*/
 
 

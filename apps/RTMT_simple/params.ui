@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="sensorTab">
     <attribute name="title">
@@ -509,7 +509,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>5</string>
+      <string>3</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="poissonNrSamples">
