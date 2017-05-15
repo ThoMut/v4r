@@ -32,8 +32,7 @@
 
 #include <v4r/apps/change_detection.h>
 
-using ms = std::chrono::milliseconds;
-using get_time = std::chrono::steady_clock ;
+
 
 typedef pcl::PointXYZRGB PointT;
 
