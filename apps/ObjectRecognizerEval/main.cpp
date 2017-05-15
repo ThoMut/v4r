@@ -228,8 +228,8 @@ main (int argc, char ** argv)
                         f.close();
                     }
                 }
- }
 
+}
             v4r::apps::RecognitionEvaluator e;
             e.setModels_dir(recognizer.getModelsDir());
             e.setTest_dir(test_dir);
