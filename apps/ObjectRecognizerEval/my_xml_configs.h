@@ -14,27 +14,27 @@ std::vector< std::pair< std::vector<XMLChange>, bool > > loadChanges()
 //            grouped_change.second = local_search_is_okay;
 //            grouped_changes.push_back( grouped_change );
 //    }
-    {
-            bool local_search_is_okay = false;
-            std::pair< std::vector<XMLChange>, bool > grouped_change;
-            grouped_change.first.push_back( XMLChange("cfg/multipipeline_config.xml", "keypoint_support_radii_", {"0.04", "0.05", "0.06"}, true ) );
-            grouped_change.first.push_back( XMLChange("cfg/multipipeline_config.xml", "keypoint_support_radii_", {"0.12", "0.08"}, true ) );
-            grouped_change.second = local_search_is_okay;
-            grouped_changes.push_back( grouped_change );
-    }
-
 //    {
-//        bool local_search_is_okay = true;
-//        std::pair< std::vector<XMLChange>, bool > grouped_change;
-//        grouped_change.first.push_back( XMLChange("cfg/sift_config.xml", "knn_", "1" ) );
-//        grouped_change.first.push_back( XMLChange("cfg/sift_config.xml", "knn_", "2" ) );
+//            bool local_search_is_okay = false;
+//            std::pair< std::vector<XMLChange>, bool > grouped_change;
+//            grouped_change.first.push_back( XMLChange("cfg/multipipeline_config.xml", "keypoint_support_radii_", {"0.04", "0.05", "0.06"}, true ) );
+//            grouped_change.first.push_back( XMLChange("cfg/multipipeline_config.xml", "keypoint_support_radii_", {"0.12", "0.08"}, true ) );
+//            grouped_change.second = local_search_is_okay;
+//            grouped_changes.push_back( grouped_change );
+//    }
+
+    {
+        bool local_search_is_okay = true;
+        std::pair< std::vector<XMLChange>, bool > grouped_change;
+        grouped_change.first.push_back( XMLChange("cfg/sift_config.xml", "knn_", {"2"} , false) );
+        grouped_change.first.push_back( XMLChange("cfg/sift_config.xml", "knn_", {"3"} , false) );
 //        grouped_change.first.push_back( XMLChange("cfg/sift_config.xml", "knn_", "3" ) );
 //        grouped_change.first.push_back( XMLChange("cfg/sift_config.xml", "knn_", "5" ) );
-////        grouped_change.first.push_back( XMLChange("cfg/sift_config.xml", "knn_", "7" ) );
-////        grouped_change.first.push_back( XMLChange("cfg/sift_config.xml", "knn_", "9" ) );
-//        grouped_change.second = local_search_is_okay;
-//        grouped_changes.push_back( grouped_change );
-//    }
+//        grouped_change.first.push_back( XMLChange("cfg/sift_config.xml", "knn_", "7" ) );
+//        grouped_change.first.push_back( XMLChange("cfg/sift_config.xml", "knn_", "9" ) );
+        grouped_change.second = local_search_is_okay;
+        grouped_changes.push_back( grouped_change );
+    }
 
 //    {
 //        bool local_search_is_okay = true;

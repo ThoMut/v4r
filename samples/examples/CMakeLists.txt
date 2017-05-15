@@ -44,6 +44,9 @@ if(BUILD_EXAMPLES)
   SET(V4R_DEPS v4r_keypoints)
   V4R_DEFINE_CPP_EXAMPLE(temporalFiltering)
 
+  SET(V4R_DEPS v4r_texturing v4r_io)
+  V4R_DEFINE_CPP_EXAMPLE(texturing_cmd_batch_new)
+
   SET(V4R_DEPS v4r_attention_segmentation)
   V4R_DEFINE_CPP_EXAMPLE(Exmpl3DSymSalMap)
   SET(V4R_DEPS v4r_attention_segmentation)

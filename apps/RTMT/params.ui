@@ -19,7 +19,7 @@
      <x>10</x>
      <y>10</y>
      <width>731</width>
-     <height>411</height>
+     <height>451</height>
     </rect>
    </property>
    <property name="currentIndex">
@@ -282,7 +282,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>12</y>
+       <y>10</y>
        <width>281</width>
        <height>17</height>
       </rect>
@@ -301,7 +301,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>92</y>
+       <y>70</y>
        <width>281</width>
        <height>17</height>
       </rect>
@@ -320,7 +320,7 @@
      <property name="geometry">
       <rect>
        <x>32</x>
-       <y>44</y>
+       <y>30</y>
        <width>146</width>
        <height>27</height>
       </rect>
@@ -333,7 +333,7 @@
      <property name="geometry">
       <rect>
        <x>190</x>
-       <y>44</y>
+       <y>30</y>
        <width>402</width>
        <height>27</height>
       </rect>
@@ -346,7 +346,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>243</y>
+       <y>193</y>
        <width>281</width>
        <height>17</height>
       </rect>
@@ -365,7 +365,7 @@
      <property name="geometry">
       <rect>
        <x>32</x>
-       <y>273</y>
+       <y>220</y>
        <width>146</width>
        <height>27</height>
       </rect>
@@ -378,7 +378,7 @@
      <property name="geometry">
       <rect>
        <x>190</x>
-       <y>273</y>
+       <y>220</y>
        <width>402</width>
        <height>27</height>
       </rect>
@@ -391,7 +391,7 @@
      <property name="geometry">
       <rect>
        <x>32</x>
-       <y>125</y>
+       <y>90</y>
        <width>581</width>
        <height>95</height>
       </rect>
@@ -445,7 +445,7 @@
      <property name="geometry">
       <rect>
        <x>34</x>
-       <y>344</y>
+       <y>283</y>
        <width>281</width>
        <height>22</height>
       </rect>
@@ -458,7 +458,7 @@
      <property name="geometry">
       <rect>
        <x>190</x>
-       <y>306</y>
+       <y>253</y>
        <width>402</width>
        <height>27</height>
       </rect>
@@ -471,13 +471,84 @@
      <property name="geometry">
       <rect>
        <x>32</x>
-       <y>306</y>
+       <y>253</y>
        <width>146</width>
        <height>27</height>
       </rect>
      </property>
      <property name="text">
       <string>3</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_21">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>320</y>
+       <width>401</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Poisson Surface Reconstruction (Mesh Creation)</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="poissonDepth">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>340</y>
+       <width>146</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>5</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="poissonNrSamples">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>370</y>
+       <width>146</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>20</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_22">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>340</y>
+       <width>402</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Poisson Depth</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_23">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>370</y>
+       <width>402</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Number of Poisson Samples</string>
      </property>
     </widget>
    </widget>

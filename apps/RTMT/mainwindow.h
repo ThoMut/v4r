@@ -42,6 +42,7 @@
 #include "ObjectSegmentation.h"
 #include "StoreTrackingModel.h"
 #include "BundleAdjustment.h"
+#include "MeshCreation.h"
 #include "MultiSession.h"
 
 #undef Success
@@ -78,9 +79,11 @@ private slots:
   void on_TrackerStart_clicked();
   void on_TrackerStop_clicked();
   void on_OptimizePoses_clicked();
+  void on_CreateMesh_clicked();
   void on_SegmentObject_clicked();
   void on_SavePointClouds_clicked();
   void on_SaveTrackerModel_clicked();
+  void on_SaveMeshModel_clicked();
   void on_ResetView_clicked();
   void on_ResetTracker_clicked();
 
@@ -94,6 +97,7 @@ private slots:
   void on_imBackward_clicked();
 
   void finishedOptimizeCameras(int num_cameras);
+  void finishedCreateMesh();
   void finishedStoreTrackingModel();
   void finishedObjectSegmentation();
   void finishedAlignment(bool ok);
@@ -123,6 +127,7 @@ private:
   ObjectSegmentation* m_segmentation;
   StoreTrackingModel* m_store_tracking_model;
   BundleAdjustment* m_ba;
+  MeshCreation* m_mesh;
   MultiSession* m_multi_session;
 
   bool have_multi_session;

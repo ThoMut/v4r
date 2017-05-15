@@ -59,6 +59,7 @@ MainWindow::MainWindow(QWidget *parent) :
   m_segmentation(new ObjectSegmentation()),
   m_store_tracking_model(new StoreTrackingModel()),
   m_ba(new BundleAdjustment()),
+  m_mesh(new MeshCreation()),
   m_multi_session(new MultiSession()),
   have_multi_session(false),
   m_num_saves_disp(0),
@@ -94,6 +95,8 @@ MainWindow::MainWindow(QWidget *parent) :
           m_sensor, SLOT(cam_tracker_params_changed(const CamaraTrackerParameter)));
   connect(m_params, SIGNAL(bundle_adjustment_parameter_changed(const BundleAdjustmentParameter)),
           m_sensor, SLOT(bundle_adjustment_parameter_changed(const BundleAdjustmentParameter)));
+  connect(m_params, SIGNAL(mesh_creation_parameter_changed(const MeshCreationParameter)),
+          m_mesh,   SLOT(mesh_creation_parameter_changed(const MeshCreationParameter)));
   connect(m_params, SIGNAL(cam_params_changed(const RGBDCameraParameter)),
           m_segmentation, SLOT(cam_params_changed(const RGBDCameraParameter)));
   connect(m_params, SIGNAL(segmentation_parameter_changed(const SegmentationParameter)),
@@ -179,6 +182,12 @@ MainWindow::MainWindow(QWidget *parent) :
   connect(m_ba, SIGNAL(finishedOptimizeCameras(int)),
           this, SLOT(finishedOptimizeCameras(int)));
 
+  // mesh creation
+  connect(m_mesh, SIGNAL(printStatus(const std::string)),
+          this, SLOT(printStatus(const std::string)));
+  connect(m_mesh, SIGNAL(finishedCreateMesh()),
+          this, SLOT(finishedCreateMesh()));
+
   // multi session
   connect(m_multi_session, SIGNAL(finishedAlignment(bool)),
           this, SLOT(finishedAlignment(bool)));
@@ -216,6 +225,7 @@ void MainWindow::activateAllButtons()
   m_ui->TrackerStop->setEnabled(true);
 
   m_ui->OptimizePoses->setEnabled(true);
+  m_ui->CreateMesh->setEnabled(true);
   m_ui->SegmentObject->setEnabled(true);
   m_ui->SavePointClouds->setEnabled(true);
   m_ui->SaveTrackerModel->setEnabled(true);
@@ -243,6 +253,7 @@ void MainWindow::deactivateAllButtons()
   m_ui->TrackerStop->setEnabled(false);
 
   m_ui->OptimizePoses->setEnabled(false);
+  m_ui->CreateMesh->setEnabled(true);
   m_ui->SegmentObject->setEnabled(false);
   m_ui->SavePointClouds->setEnabled(false);
   m_ui->SaveTrackerModel->setEnabled(false);
@@ -407,12 +418,27 @@ void MainWindow::on_OptimizePoses_clicked()
   m_ba->optimizeCamStructProj(m_sensor->getModel(),m_sensor->getTrajectory(),m_sensor->getClouds(),m_sensor->getAlignedCloud());
 }
 
+
 void MainWindow::finishedOptimizeCameras(int num_cameras)
 {
     (void)num_cameras;
   //std::string txt = std::string("Status: Optimized ")+v4r::toString(num_cameras,0)+std::string(" cameras");
   //m_ui->statusLabel->setText(txt.c_str());
 
+  activateAllButtons();
+}
+
+void MainWindow::on_CreateMesh_clicked()
+{
+  deactivateAllButtons();
+
+//  pcl::PointCloud<pcl::PointXYZRGBNormal>::Ptr model_cloud(new pcl::PointCloud<pcl::PointXYZRGBNormal>);
+//  model_cloud =
+  m_mesh->calculateMesh(m_segmentation->getModelCloud());
+}
+
+void MainWindow::finishedCreateMesh()
+{
   activateAllButtons();
 }
 
@@ -558,6 +584,42 @@ void MainWindow::on_SaveTrackerModel_clicked()
       if (have_multi_session)
         m_store_tracking_model->storeTrackingModel(m_params->get_rgbd_path(), object_name.toStdString(), m_multi_session->getCameras(),m_multi_session->getClouds(),m_multi_session->getMasks(), Eigen::Matrix4f::Identity());
       else m_store_tracking_model->storeTrackingModel(m_params->get_rgbd_path(), object_name.toStdString(), m_segmentation->getCameras(),m_sensor->getClouds(),m_segmentation->getMasks(), m_segmentation->getObjectBaseTransform());
+    }
+  }
+}
+
+void MainWindow::on_SaveMeshModel_clicked()
+{
+  bool ok_save;
+  QString text = QString::fromStdString(m_params->get_object_name());
+
+  QString model_name = QInputDialog::getText(this, tr("Store mesh for recognition"), tr("Model name:"), QLineEdit::Normal, text, &ok_save);
+
+  if ( ok_save && model_name.isNull() == false )
+  {
+    if (boost::filesystem::exists( m_params->get_rgbd_path() + "/" + model_name.toStdString()+ "/mesh/") )
+    {
+      int ret = QMessageBox::warning(this, tr("Store point clouds for recognition"),
+                                     tr("The directory exists!\n"
+                                        "Do you want to overwrite the files?"), QMessageBox::Save, QMessageBox::Cancel);
+      if (ret!=QMessageBox::Save)
+        ok_save = false;
+    }
+
+    if (ok_save)
+    {
+      m_params->set_object_name(model_name);
+      m_ui->statusLabel->setText("Status: Save mesh...");
+
+      bool ok=false;
+
+      //if (have_multi_session)
+        //ok = m_multi_session->savePointClouds(m_params->get_rgbd_path(), model_name.toStdString());
+      //else
+      ok = m_mesh->saveMesh(m_params->get_rgbd_path(), model_name.toStdString());
+
+      if (ok) m_ui->statusLabel->setText("Status: Saved mesh");
+      else m_ui->statusLabel->setText("Status: No mesh data available!");
     }
   }
 }

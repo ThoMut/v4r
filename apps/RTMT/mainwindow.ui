@@ -80,7 +80,7 @@
      <rect>
       <x>653</x>
       <y>410</y>
-      <width>16</width>
+      <width>82</width>
       <height>62</height>
      </rect>
     </property>
@@ -113,7 +113,7 @@
       <x>707</x>
       <y>346</y>
       <width>166</width>
-      <height>136</height>
+      <height>141</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -386,8 +386,8 @@
     <property name="geometry">
      <rect>
       <x>660</x>
-      <y>254</y>
-      <width>251</width>
+      <y>280</y>
+      <width>334</width>
       <height>29</height>
      </rect>
     </property>
@@ -416,6 +416,39 @@
        </property>
       </widget>
      </item>
+     <item row="0" column="3">
+      <widget class="QPushButton" name="SaveMeshModel">
+       <property name="text">
+        <string>Grasper</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="gridLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>240</y>
+      <width>161</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout_4">
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_8">
+       <property name="text">
+        <string>Mesh          </string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QPushButton" name="CreateMesh">
+       <property name="text">
+        <string>Create</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </widget>
    <zorder>layoutWidget</zorder>
@@ -426,6 +459,7 @@
    <zorder>layoutWidget4</zorder>
    <zorder>layoutWidget5</zorder>
    <zorder>ResetView</zorder>
+   <zorder>gridLayoutWidget</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -433,7 +467,7 @@
      <x>0</x>
      <y>0</y>
      <width>1100</width>
-     <height>25</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
