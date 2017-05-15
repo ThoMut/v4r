@@ -280,6 +280,12 @@ public:
     {
         models_dir_ = dir;
     }
+
+    typename v4r::HypothesisVerification<PointT, PointT>::Ptr
+    getHypothesesVerification()
+    {
+        return hv_;
+    }
 };
 
 }
