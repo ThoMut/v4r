@@ -24,10 +24,11 @@ main (int argc, char ** argv)
     float recall = (float)tp / (tp + fn);
     float fscore = 2 * precision * recall / (precision + recall);
 
-//            double score = 4*recall + precision - median_time_ms*0.01*0.01;    // we want to get as much hypotheses as possible - precision will be improved with verification
+    double score = 4*recall + precision - median_time_ms*0.01*0.01;    // we want to get as much hypotheses as possible - precision will be improved with verification
 
     std::cout << "tp: " << tp << ", fp: " << fp << ", fn: " << fn
-              << ", precision: " << precision << ", recall: " << recall << ", fscore: " << fscore << std::endl;
+              << ", precision: " << precision << ", recall: " << recall
+              << ", fscore: " << fscore << ", score: " << score << std::endl;
 
 
     return 0;

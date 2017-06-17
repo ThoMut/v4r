@@ -15,6 +15,8 @@
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 
+#include <v4r/apps/change_detection.h>
+
 namespace po = boost::program_options;
 
 namespace bf=boost::filesystem;
@@ -157,14 +159,23 @@ main (int argc, char ** argv)
 
 
             v4r::apps::ObjectRecognizerParameter or_param (recognizer_config);
-            v4r::apps::ObjectRecognizer<PT> recognizer(or_param);
-            recognizer.initialize(to_pass_further_tmp);
+            boost::shared_ptr<v4r::apps::ObjectRecognizer<PT>> recognizer;
+            recognizer.reset(new v4r::apps::ObjectRecognizer<PT>(or_param));
+
+            recognizer->initialize(to_pass_further_tmp);
+
+            v4r::apps::ChangeDetector<PT> detector;
+            detector.init(or_param, recognizer);
 
             std::vector<double> elapsed_time;
 
             std::vector< std::string> sub_folder_names = v4r::io::getFoldersInDirectory( test_dir );
             if(sub_folder_names.empty()) sub_folder_names.push_back("");
 
+            pcl::PointCloud<PT>::Ptr old_cloud(new pcl::PointCloud<PT>());
+            pcl::io::loadPCDFile( "/home/thomas/DA/shared_docker_host/data/test/scene_later/workspace_init.pcd", *old_cloud);
+
+            std::vector<typename v4r::ObjectHypothesis<PT>::Ptr > verified_hypotheses;
 
             for (const std::string &sub_folder_name : sub_folder_names)
             {
@@ -182,9 +193,8 @@ main (int argc, char ** argv)
 
                     pcl::StopWatch t;
 
-                    std::vector<typename v4r::ObjectHypothesis<PT>::Ptr > verified_hypotheses = recognizer.recognize(cloud);
-                    std::vector<v4r::ObjectHypothesesGroup<PT> > generated_object_hypotheses = recognizer.getGeneratedObjectHypothesis();
-
+                    verified_hypotheses = detector.hypotheses_verification(verified_hypotheses, old_cloud, cloud);
+                    std::vector<v4r::ObjectHypothesesGroup<PT> > generated_object_hypotheses;// = recognizer.getGeneratedObjectHypothesis();
                     elapsed_time.push_back( t.getTime() );
 
                     if ( !out_dir_eval.empty() )  // write results to disk (for each verified hypothesis add a row in the text file with object name, dummy confidence value and object pose in row-major order)
@@ -226,18 +236,20 @@ main (int argc, char ** argv)
                             }
                         }
                         f.close();
+
+                        old_cloud = cloud;
                     }
                 }
 
         }
             v4r::apps::RecognitionEvaluator e;
-            e.setModels_dir(recognizer.getModelsDir());
+            e.setModels_dir(recognizer->getModelsDir());
             e.setTest_dir(test_dir);
             e.setOr_dir(out_dir_eval);
             e.setGt_dir(gt_dir);
             e.setOut_dir(out_dir_eval);
             e.setUse_generated_hypotheses(false);
-            e.setVisualize(true);
+            e.setVisualize(false);
             float recognition_rate = e.compute_recognition_rate_over_occlusion();
             size_t tp, fp, fn;
             e.compute_recognition_rate(tp, fp, fn);

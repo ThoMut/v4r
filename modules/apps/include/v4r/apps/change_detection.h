@@ -43,6 +43,8 @@ class V4R_EXPORTS ChangeDetector
 private:
     boost::shared_ptr<ObjectRecognizer<PointT> > recognizer_;
     ObjectRecognizerParameter recognizer_param_;
+    typename v4r::NormalEstimator<PointT>::Ptr normal_estimator_;
+    typename v4r::HypothesisVerification<PointT, PointT>::Ptr hv_;
 
 public:
 
@@ -51,6 +53,11 @@ public:
     {
         recognizer_param_ = recognizer_param;
         recognizer_ = recognizer;
+
+        int normal_computation_method_ = recognizer_param_.normal_computation_method_; //NormalEstimatorType::PCL_INTEGRAL_NORMAL;
+        std::vector<std::string> empty_vector;
+        normal_estimator_ = v4r::initNormalEstimator<PointT> ( normal_computation_method_, empty_vector );
+        hv_ = recognizer_->getHypothesesVerification();
     }
 
     std::vector<typename ObjectHypothesis<PointT>::Ptr >
@@ -59,23 +66,24 @@ public:
                             typename pcl::PointCloud<PointT>::Ptr &cloud_target)
     {
 
-        LOG(INFO) << "################ calculate normals of new scene ######################"<< std::endl;
+        LOG(INFO) << "# calculate difference point cloud #"<< std::endl;
 
-        //TODO:move to init
-        int normal_computation_method_ = recognizer_param_.normal_computation_method_; //NormalEstimatorType::PCL_INTEGRAL_NORMAL;
-        typename v4r::NormalEstimator<PointT>::Ptr normal_estimator_;
-        std::vector<std::string> empty_vector;
-        normal_estimator_ = v4r::initNormalEstimator<PointT> ( normal_computation_method_, empty_vector );
-        //end TODO:move to init
+        typename pcl::PointCloud<PointT>::Ptr cloud_filtered (new pcl::PointCloud<PointT>);
+        cloud_filtered = segment_difference(cloud_in, cloud_target);
 
-        pcl::PointCloud<pcl::Normal>::Ptr normals;
-        normal_estimator_->setInputCloud( cloud_in );
-        normals = normal_estimator_->compute();
+        LOG(INFO) << "# start recognition of new scene #"<< std::endl;
 
+        std::vector<v4r::ObjectHypothesesGroup<PointT> > generated_hypotheses_group;
+        std::vector<typename v4r::ObjectHypothesis<PointT>::Ptr > dummy_hyp;
+        //disable hypotheses verification inside recognizer to gain speed!
+        recognizer_->set_skip_verification(true);
+        dummy_hyp = recognizer_->recognize(cloud_filtered);
+        generated_hypotheses_group = recognizer_->getGeneratedObjectHypothesis();
+
+        //hypotheses of last recognition redefined as new input for hypotheses verification
         std::vector<v4r::ObjectHypothesesGroup<PointT> > hypotheses_input_group;
         std::vector<typename v4r::ObjectHypothesis<PointT>::Ptr > hypotheses_output;
 
-        //hypotheses of last recognition redefined as new input for hypotheses verification
         typename v4r::ObjectHypothesis<PointT>::Ptr empty;
         for(unsigned int i=0; i<verified_hypotheses.size(); ++i)
         {
@@ -85,19 +93,7 @@ public:
             hypotheses_input_group.push_back(hyp_);
         }
 
-        LOG(INFO) << "################ start hypotheses verification on new scene ######################"<< std::endl;
-
-        //TODO:move to init
-        typename v4r::HypothesisVerification<PointT, PointT>::Ptr hv_;
-        hv_ = recognizer_->getHypothesesVerification();
-        //end TODO:move to init
-
-        //hv_->setModelDatabase(model_database_); //done in recognizer
-        hv_->setSceneCloud( cloud_target );
-        hv_->setNormals( normals );
-        hv_->setHypotheses( hypotheses_input_group );
-        hv_->verify();
-        hypotheses_output = hv_->getVerifiedHypotheses();
+        //combine old and new hypotheses for input into hv
 
         LOG(INFO) << "hypotheses input from old scene:" << std::endl;
         for ( const typename v4r::ObjectHypothesesGroup<PointT> &gohg : hypotheses_input_group )
@@ -108,17 +104,58 @@ public:
             }
         }
 
-        LOG(INFO) << "hypotheses output for new scene:" << std::endl;
-        for ( const typename v4r::ObjectHypothesis<PointT>::Ptr &voh : hypotheses_output )
+        hypotheses_input_group.insert(hypotheses_input_group.end(), generated_hypotheses_group.begin(), generated_hypotheses_group.end());
+
+        LOG(INFO) << "hypotheses input :" << std::endl;
+        for ( const typename v4r::ObjectHypothesesGroup<PointT> &gohg : hypotheses_input_group )
+        {
+            for ( const typename v4r::ObjectHypothesis<PointT>::Ptr &goh : gohg.ohs_ )
+            {
+                LOG(INFO) << goh->model_id_ << std::endl;
+            }
+        }
+
+        LOG(INFO) << "# calculate normals of new scene #"<< std::endl;
+
+        pcl::PointCloud<pcl::Normal>::Ptr normals;
+        normal_estimator_->setInputCloud( cloud_target ); //cloud_target
+        normals = normal_estimator_->compute();
+
+        LOG(INFO) << "# start hypotheses verification on new scene #"<< std::endl;
+
+        //hv_->setModelDatabase(model_database_); //done in recognizer
+        hv_->setSceneCloud( cloud_target );
+        hv_->setNormals( normals );
+        hv_->setHypotheses( hypotheses_input_group );
+        hv_->verify();
+        hypotheses_output = hv_->getVerifiedHypotheses();
+
+        LOG(INFO) << "final verified hypotheses:" << std::endl;
+        for (const typename v4r::ObjectHypothesis<PointT>::Ptr &voh : hypotheses_output ) //verified_hypotheses
         {
             LOG(INFO) << voh->model_id_ << std::endl;
         }
 
+        //      pcl::visualization::PCLVisualizer viewer("3D Viewer");
+        //      viewer.addCoordinateSystem(1.0f);
+        //      viewer.addPointCloud(cloud_filtered, "our point cloud");
+        //      viewer.spin();
+
+        return hypotheses_output; //verified_hypotheses
+    }
+
+    typename pcl::PointCloud<PointT>::Ptr
+    segment_difference(typename pcl::PointCloud<PointT>::Ptr &cloud_in,
+                    typename pcl::PointCloud<PointT>::Ptr &cloud_target)
+    {
         // only compare depth data
         typename pcl::PointCloud<PointT>::Ptr cloud_out (new pcl::PointCloud<PointT>);
 
         cloud_out->width = cloud_in->width;
         cloud_out->height = cloud_in->height;
+
+        LOG(INFO) << "cloud_in->width:" << cloud_in->width << std::endl;
+        LOG(INFO) << "cloud_in->height:" << cloud_in->height << std::endl;
 
         unsigned int number_points = cloud_in->width * cloud_in->height;
         cloud_out->points.resize(number_points);
@@ -132,6 +169,7 @@ public:
                 cloud_out->points[i] = cloud_target->points[i];
             }
         }
+      //return cloud_out;
 
       /// outlier removal:
       //moving a window over the organized point cloud, only patches size of window_size*window_size are accepted
@@ -181,17 +219,68 @@ public:
       }
       }
 
-      verified_hypotheses = recognizer_->recognize(cloud_filtered);
-      verified_hypotheses.insert(verified_hypotheses.end(), hypotheses_output.begin(), hypotheses_output.end());
+      return cloud_filtered;
 
-      LOG(INFO) << "final verified hypotheses:" << std::endl;
-      for (const typename v4r::ObjectHypothesis<PointT>::Ptr &voh : verified_hypotheses )
-      {
-          LOG(INFO) << voh->model_id_ << std::endl;
-      }
+    } //end init_empty_scene
 
-      return verified_hypotheses;
+    std::vector<typename ObjectHypothesis<PointT>::Ptr >
+    init_workspace(typename pcl::PointCloud<PointT>::Ptr &cloud_original,
+                   typename pcl::PointCloud<PointT>::Ptr &cloud_empty_workspace)
+    {
+        LOG(INFO) << "# calculate difference point cloud #"<< std::endl;
+
+        typename pcl::PointCloud<PointT>::Ptr cloud_filtered (new pcl::PointCloud<PointT>);
+        cloud_filtered = segment_difference(cloud_empty_workspace, cloud_original);
+
+        LOG(INFO) << "# start recognition of new scene #"<< std::endl;
+
+        std::vector<v4r::ObjectHypothesesGroup<PointT> > generated_hypotheses_group;
+        std::vector<typename v4r::ObjectHypothesis<PointT>::Ptr > dummy_hyp;
+        //disable hypotheses verification inside recognizer to gain speed!
+        recognizer_->set_skip_verification(true);
+        dummy_hyp = recognizer_->recognize(cloud_filtered);
+        generated_hypotheses_group = recognizer_->getGeneratedObjectHypothesis();
+
+        LOG(INFO) << "hypotheses input :" << std::endl;
+        for ( const typename v4r::ObjectHypothesesGroup<PointT> &gohg : generated_hypotheses_group )
+        {
+            for ( const typename v4r::ObjectHypothesis<PointT>::Ptr &goh : gohg.ohs_ )
+            {
+                LOG(INFO) << goh->model_id_ << std::endl;
+            }
+        }
+
+        LOG(INFO) << "# calculate normals of new scene #"<< std::endl;
+
+        pcl::PointCloud<pcl::Normal>::Ptr normals;
+        normal_estimator_->setInputCloud( cloud_original ); //cloud_target
+        normals = normal_estimator_->compute();
+
+        LOG(INFO) << "# start hypotheses verification on new scene #"<< std::endl;
+
+        std::vector<typename v4r::ObjectHypothesis<PointT>::Ptr > hypotheses_output;
+        //hv_->setModelDatabase(model_database_); //done in recognizer
+        hv_->setSceneCloud( cloud_original );
+        hv_->setNormals( normals );
+        hv_->setHypotheses( generated_hypotheses_group );
+        hv_->verify();
+        hypotheses_output = hv_->getVerifiedHypotheses();
+
+        LOG(INFO) << "final verified hypotheses:" << std::endl;
+        for (const typename v4r::ObjectHypothesis<PointT>::Ptr &voh : hypotheses_output ) //verified_hypotheses
+        {
+            LOG(INFO) << voh->model_id_ << std::endl;
+        }
+
+        //      pcl::visualization::PCLVisualizer viewer("3D Viewer");
+        //      viewer.addCoordinateSystem(1.0f);
+        //      viewer.addPointCloud(cloud_filtered, "our point cloud");
+        //      viewer.spin();
+
+        return hypotheses_output; //verified_hypotheses
     }
+
+
 };
 
 }

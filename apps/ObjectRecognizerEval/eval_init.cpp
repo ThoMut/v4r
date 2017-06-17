@@ -15,6 +15,10 @@
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 
+#include <v4r/apps/change_detection.h>
+
+
+
 namespace po = boost::program_options;
 
 namespace bf=boost::filesystem;
@@ -157,8 +161,13 @@ main (int argc, char ** argv)
 
 
             v4r::apps::ObjectRecognizerParameter or_param (recognizer_config);
-            v4r::apps::ObjectRecognizer<PT> recognizer(or_param);
-            recognizer.initialize(to_pass_further_tmp);
+            boost::shared_ptr<v4r::apps::ObjectRecognizer<PT>> recognizer;
+            recognizer.reset(new v4r::apps::ObjectRecognizer<PT>(or_param));
+
+            recognizer->initialize(to_pass_further_tmp);
+
+            v4r::apps::ChangeDetector<PT> detector;
+            detector.init(or_param, recognizer);
 
             std::vector<double> elapsed_time;
 
@@ -180,10 +189,38 @@ main (int argc, char ** argv)
                     pcl::PointCloud<PT>::Ptr cloud(new pcl::PointCloud<PT>());
                     pcl::io::loadPCDFile( test_path.string(), *cloud);
 
+
+                    pcl::PointCloud<PT>::Ptr empty_workspace(new pcl::PointCloud<PT>());
+                    pcl::io::loadPCDFile( "/home/thomas/DA/shared_docker_host/data/test/scene_later/workspace_init.pcd", *empty_workspace);
+                    //cloud = detector.segment_difference(empty_workspace, cloud);
+
+//                    /// visual debug
+//                    pcl::visualization::PCLVisualizer vis_;
+//                    int vp1_, vp3_;
+//                    vis_.createViewPort(0,0,0.5,1, vp1_);
+//                    vis_.createViewPort(0.5, 0, 1, 1,vp3_);
+
+//                    vis_.removeAllPointClouds();
+//                    vis_.removeAllPointClouds(vp1_);
+//                    vis_.removeAllPointClouds(vp3_);
+
+//                    pcl::PointCloud<PT>::Ptr cloud_temp(new pcl::PointCloud<PT>());
+//                    cloud_temp = cloud;
+//                    vis_.addPointCloud(cloud_temp, "input", vp1_);
+
+
+
+//                    vis_.addPointCloud(cloud, "input_3", vp3_);
+
+//                    vis_.setCameraPosition(0, 0, 0, 0, 0, 1, 0, -1, 0);
+//                    vis_.resetCamera();
+//                    vis_.spin();
+
                     pcl::StopWatch t;
 
-                    std::vector<typename v4r::ObjectHypothesis<PT>::Ptr > verified_hypotheses = recognizer.recognize(cloud);
-                    std::vector<v4r::ObjectHypothesesGroup<PT> > generated_object_hypotheses = recognizer.getGeneratedObjectHypothesis();
+                    std::vector<typename v4r::ObjectHypothesis<PT>::Ptr > verified_hypotheses = detector.init_workspace(cloud, empty_workspace);
+
+                    std::vector<v4r::ObjectHypothesesGroup<PT> > generated_object_hypotheses;// = recognizer->getGeneratedObjectHypothesis();
 
                     elapsed_time.push_back( t.getTime() );
 
@@ -231,13 +268,13 @@ main (int argc, char ** argv)
 
         }
             v4r::apps::RecognitionEvaluator e;
-            e.setModels_dir(recognizer.getModelsDir());
+            e.setModels_dir(recognizer->getModelsDir());
             e.setTest_dir(test_dir);
             e.setOr_dir(out_dir_eval);
             e.setGt_dir(gt_dir);
             e.setOut_dir(out_dir_eval);
             e.setUse_generated_hypotheses(false);
-            e.setVisualize(true);
+            e.setVisualize(false);
             float recognition_rate = e.compute_recognition_rate_over_occlusion();
             size_t tp, fp, fn;
             e.compute_recognition_rate(tp, fp, fn);

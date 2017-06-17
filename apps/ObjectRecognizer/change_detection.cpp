@@ -73,8 +73,8 @@ main (int argc, char** argv)
     pcl::PointCloud<PointT>::Ptr cloud_target (new pcl::PointCloud<PointT>);
     pcl::PointCloud<PointT>::Ptr cloud_out (new pcl::PointCloud<PointT>);
 
-    pcl::io::loadPCDFile<PointT>("/home/thomas/DA/shared_docker_host/data/scenes_change/twoObj.pcd", *cloud_in);
-    pcl::io::loadPCDFile<PointT>("/home/thomas/DA/shared_docker_host/data/scenes_change/oneObj.pcd", *cloud_target);
+    pcl::io::loadPCDFile<PointT>("/home/thomas/DA/shared_docker_host/data/scenes_change/oneObj.pcd", *cloud_in);
+    pcl::io::loadPCDFile<PointT>("/home/thomas/DA/shared_docker_host/data/scenes_change/twoObj.pcd", *cloud_target);
 
 
     std::string test_file;

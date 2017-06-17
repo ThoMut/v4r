@@ -380,18 +380,20 @@ ObjectRecognizer<PointT>::recognize(const typename pcl::PointCloud<PointT>::Cons
     {
         const std::map<std::string, typename LocalObjectModel::ConstPtr> lomdb = local_recognition_pipeline_->getLocalObjectModelDatabase();
         rec_vis_->setCloud( cloud );
-        //rec_vis_->setProcessedCloud( processed_cloud );
+        rec_vis_->setProcessedCloud( processed_cloud ); //comment_out
         rec_vis_->setNormals(normals);
 
-        //rec_vis_->setGeneratedObjectHypotheses( generated_object_hypotheses_ );
-        //rec_vis_->setRefinedGeneratedObjectHypotheses( generated_object_hypotheses_refined_ );
+        rec_vis_->setGeneratedObjectHypotheses( generated_object_hypotheses_ ); //comment_out
+        rec_vis_->setRefinedGeneratedObjectHypotheses( generated_object_hypotheses_refined_ ); //comment_out
         rec_vis_->setLocalModelDatabase(lomdb);
         rec_vis_->setVerifiedObjectHypotheses( verified_hypotheses_ );
-        rec_vis_->visualize_simple();
+        //rec_vis_->visualize_simple();
+        rec_vis_->visualize();
     }
 
     return verified_hypotheses_;
 }
+
 
 template class V4R_EXPORTS ObjectRecognizer<pcl::PointXYZRGB>;
 
