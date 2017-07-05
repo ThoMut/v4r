@@ -136,10 +136,12 @@ public:
             LOG(INFO) << voh->model_id_ << std::endl;
         }
 
-        //      pcl::visualization::PCLVisualizer viewer("3D Viewer");
-        //      viewer.addCoordinateSystem(1.0f);
-        //      viewer.addPointCloud(cloud_filtered, "our point cloud");
-        //      viewer.spin();
+              pcl::visualization::PCLVisualizer viewer("3D Viewer");
+              viewer.addPointCloud(cloud_filtered, "our point cloud");
+              viewer.setBackgroundColor(1,1,1);
+              viewer.setCameraPosition(0, 0, 0, 0, 0, 1, 0, -1, 0);
+              viewer.resetCamera();
+              viewer.spin();
 
         return hypotheses_output; //verified_hypotheses
     }

@@ -22,6 +22,7 @@ namespace bf=boost::filesystem;
 int
 main (int argc, char ** argv)
 {
+
     typedef pcl::PointXYZRGB PT;
 //    const std::string tmp_log_dir = "/tmp/ObjectRecognizerEvalLogFiles/";
 //    if( v4r::io::existsFolder(tmp_log_dir) )
@@ -237,7 +238,7 @@ main (int argc, char ** argv)
             e.setGt_dir(gt_dir);
             e.setOut_dir(out_dir_eval);
             e.setUse_generated_hypotheses(false);
-            e.setVisualize(true);
+            e.setVisualize(false);
             float recognition_rate = e.compute_recognition_rate_over_occlusion();
             size_t tp, fp, fn;
             e.compute_recognition_rate(tp, fp, fn);
