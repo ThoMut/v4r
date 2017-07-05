@@ -77,14 +77,15 @@ public:
         rotational_invariant_objects_ = {
             "toilet_paper", "red_mug_white_spots", "muller_milch_shoko", "muller_milch_banana", "coffee_container",
             "object_11", "object_19", "object_29", "object_32",
-            "object_18", "object_22", "object_23", "object_25", "object_27", "object_28" //last row are debatable objects - not completely invariant but very hard to distinguish
+            "object_18", "object_22", "object_23", "object_25", "object_27", "object_28", //last row are debatable objects - not completely invariant but very hard to distinguish
+            "coffee_can_single_2opt", "red_cup_single_2opt", "race_single_2opt", "peanuts_single_2opt"
         };
 
         rotational_symmetric_objects_ = {
             "jasmine_green_tea", "fruchtmolke", "asus_box",
             "object_10", "object_26", "object_35",
-            "object_01", "object_02", "object_03", "object_09", "object_08", "object_30", "object_31", "object_33" //last row are debatable objects - not 100% symmetric but very hard to distinguish
-
+            "object_01", "object_02", "object_03", "object_09", "object_08", "object_30", "object_31", "object_33", //last row are debatable objects - not 100% symmetric but very hard to distinguish
+            "twinings_single_2opt"
         };
 
         vis_params_.reset(new PCLVisualizationParams());

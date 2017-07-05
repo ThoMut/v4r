@@ -28,8 +28,8 @@ int main (int argc, char ** argv)
     typedef pcl::PointXYZRGB PointT;
 
     std::string path;
-    int i_rows = 2;
-    bool center = false;
+    int i_rows = 1;
+    bool center = true;
     bool save_img = false;
 
     bool multi_view = true;
@@ -164,6 +164,9 @@ int main (int argc, char ** argv)
         }
         else
             vis.addPointCloud(cloud, cloud_files[file_id]);
+
+        vis.setBackgroundColor(1, 1, 1, viewport[file_id]);
+        vis.addCoordinateSystem(0.15,viewport[file_id]);
     }
 
     if(multi_view) { // display remaining windows with same background

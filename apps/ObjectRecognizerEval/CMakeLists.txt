@@ -57,6 +57,12 @@ add_definitions(-Dlinux -D__x86_64__)
 add_executable(ObjectRecognizerEval main.cpp boost_xml_editor.h my_xml_configs.h)
 target_link_libraries(ObjectRecognizerEval ${OR_DEPS} ${DEP_LIBS})
 
+add_executable(ObjectRecognizerEvalInit eval_init.cpp boost_xml_editor.h my_xml_configs.h)
+target_link_libraries(ObjectRecognizerEvalInit ${OR_DEPS} ${DEP_LIBS})
+
+add_executable(ObjectRecognizerEvalChange eval_change.cpp boost_xml_editor.h my_xml_configs.h)
+target_link_libraries(ObjectRecognizerEvalChange ${OR_DEPS} ${DEP_LIBS})
+
 add_executable(compute_confusion_matrix compute_confusion_matrix.cpp )
 target_link_libraries(compute_confusion_matrix ${OR_DEPS} ${DEP_LIBS})
 

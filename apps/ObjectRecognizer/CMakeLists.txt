@@ -64,6 +64,7 @@ target_link_libraries(compute_recognition_rate ${OR_DEPS} ${DEP_LIBS})
 add_executable(change_detection change_detection.cpp)
 target_link_libraries(change_detection ${OR_DEPS} ${DEP_LIBS})
 
+
 INSTALL(TARGETS ObjectRecognizer compute_recognition_rate_over_occlusion compute_recognition_rate change_detection
   RUNTIME DESTINATION bin
   LIBRARY DESTINATION lib

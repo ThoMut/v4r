@@ -281,11 +281,19 @@ public:
         models_dir_ = dir;
     }
 
+
     typename v4r::HypothesisVerification<PointT, PointT>::Ptr
     getHypothesesVerification()
     {
         return hv_;
     }
+
+    void
+    set_skip_verification(bool skip_verification)
+    {
+        skip_verification_ = skip_verification;
+    }
+
 };
 
 }

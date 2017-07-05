@@ -150,15 +150,17 @@ SIFTLocalEstimation<PointT>::compute (const cv::Mat_ < cv::Vec3b > &colorImage, 
     }
 #else
     std::vector<cv::KeyPoint> ks;
-    sift_->operator ()(grayImage, cv::Mat(), ks, descriptors, false);
+    //sift_->operator ()(grayImage, cv::Mat(), ks, descriptors, false); //changed
 
 
     int num = ks.size();
-    if (num>0)
+    if (1)//num>0)
     {
-        std::vector<SiftGPU::SiftKeypoint> ks (num);
+        std::vector<cv::KeyPoint> ks (num);
         cv::Mat descriptors(num,128,CV_32F);
-        sift_->GetFeatureVector(&ks[0], descriptors.ptr<float>(0));
+        sift_->operator ()(grayImage, cv::Mat(), ks, descriptors, false);
+
+        //sift_->GetFeatureVector(&ks[0], descriptors.ptr<float>(0));
         keypoints = Eigen::Matrix2Xf(2, ks.size());
         signatures.resize (ks.size (), std::vector<float>(128));
 

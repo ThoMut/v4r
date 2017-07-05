@@ -18,6 +18,7 @@ main (int argc, char ** argv)
     typedef pcl::PointXYZRGB PT;
 
     std::string test_file;
+    std::string out_dir = "/tmp/object_recognition_results/";
     std::string recognizer_config = "cfg/multipipeline_config.xml";
     int verbosity = -1;
 
@@ -40,13 +41,13 @@ main (int argc, char ** argv)
     v4r::apps::ObjectRecognizer<PT> recognizer (param);
     recognizer.initialize(to_pass_further);
 
-    for(int i=1; i<15; ++i)
+    std::vector< std::string > scenes = v4r::io::getFilesInDirectory( test_file, ".*.pcd", false );
+
+    for(int i=1; i<=4; ++i)
     {
-        if(i==10) {continue;}
+       std::string test_file1 = test_file;
 
-        std::string test_file1 = test_file;
-
-        test_file1.append("photo" + std::to_string(i) + ".pcd");
+        test_file1.append("change" + std::to_string(i) + ".pcd");
         LOG(INFO) << "Recognizing file " << test_file1;
         pcl::PointCloud<PT>::Ptr cloud(new pcl::PointCloud<PT>());
         pcl::io::loadPCDFile( test_file1, *cloud);
@@ -57,10 +58,31 @@ main (int argc, char ** argv)
 
         std::vector<typename v4r::ObjectHypothesis<PT>::Ptr > verified_hypotheses = recognizer.recognize(cloud);
 
+//        for ( const v4r::ObjectHypothesis<PT>::Ptr &voh : verified_hypotheses )
+//        {
+//            std::cout << voh->model_id_ << std::endl;
+
+//        }
+
+        std::string out_basename = "scene" + std::to_string(i) + ".anno";
+        //boost::replace_last(out_basename, ".pcd", ".anno");
+        bf::path out_path = out_dir;
+//        out_path /= sub_folder_name;
+        out_path /= out_basename;
+
+        v4r::io::createDirForFileIfNotExist(out_path.string());
+
+        // save verified hypotheses
+        std::ofstream f ( out_path.string().c_str() );
         for ( const v4r::ObjectHypothesis<PT>::Ptr &voh : verified_hypotheses )
         {
-            std::cout << voh->model_id_ << std::endl;
+            f << voh->model_id_ << " (" << voh->confidence_ << "): ";
+            for (size_t row=0; row <4; row++)
+                for(size_t col=0; col<4; col++)
+                    f << voh->transform_(row, col) << " ";
+            f << std::endl;
         }
+        f.close();
 
     }
 

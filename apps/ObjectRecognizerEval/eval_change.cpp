@@ -15,6 +15,10 @@
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 
+#include <v4r/apps/change_detection.h>
+#include <v4r/recognition/object_hypothesis.h>
+#include <v4r/recognition/source.h>
+
 namespace po = boost::program_options;
 
 namespace bf=boost::filesystem;
@@ -22,7 +26,6 @@ namespace bf=boost::filesystem;
 int
 main (int argc, char ** argv)
 {
-
     typedef pcl::PointXYZRGB PT;
 //    const std::string tmp_log_dir = "/tmp/ObjectRecognizerEvalLogFiles/";
 //    if( v4r::io::existsFolder(tmp_log_dir) )
@@ -158,14 +161,23 @@ main (int argc, char ** argv)
 
 
             v4r::apps::ObjectRecognizerParameter or_param (recognizer_config);
-            v4r::apps::ObjectRecognizer<PT> recognizer(or_param);
-            recognizer.initialize(to_pass_further_tmp);
+            boost::shared_ptr<v4r::apps::ObjectRecognizer<PT>> recognizer;
+            recognizer.reset(new v4r::apps::ObjectRecognizer<PT>(or_param));
+
+            recognizer->initialize(to_pass_further_tmp);
+
+            v4r::apps::ChangeDetector<PT> detector;
+            detector.init(or_param, recognizer);
 
             std::vector<double> elapsed_time;
 
             std::vector< std::string> sub_folder_names = v4r::io::getFoldersInDirectory( test_dir );
             if(sub_folder_names.empty()) sub_folder_names.push_back("");
 
+            pcl::PointCloud<PT>::Ptr old_cloud(new pcl::PointCloud<PT>());
+            pcl::io::loadPCDFile( "/home/thomas/DA/shared_docker_host/data/test/scene_later/workspace_init.pcd", *old_cloud);
+
+            std::vector<typename v4r::ObjectHypothesis<PT>::Ptr > verified_hypotheses;
 
             for (const std::string &sub_folder_name : sub_folder_names)
             {
@@ -183,9 +195,50 @@ main (int argc, char ** argv)
 
                     pcl::StopWatch t;
 
-                    std::vector<typename v4r::ObjectHypothesis<PT>::Ptr > verified_hypotheses = recognizer.recognize(cloud);
-                    std::vector<v4r::ObjectHypothesesGroup<PT> > generated_object_hypotheses = recognizer.getGeneratedObjectHypothesis();
+                    verified_hypotheses = detector.hypotheses_verification(verified_hypotheses, old_cloud, cloud);
 
+//                    /// visual debug
+//                    pcl::visualization::PCLVisualizer vis_;
+//                    int vp1_, vp2_, vp3_;
+//                    vis_.createViewPort(0,0,0.33,1, vp1_);
+//                    vis_.createViewPort(0.33,0,0.66,1, vp2_);
+//                    vis_.createViewPort(0.66, 0, 1, 1,vp3_);
+
+//                    vis_.removeAllPointClouds();
+//                    vis_.removeAllPointClouds(vp1_);
+//                    vis_.removeAllPointClouds(vp2_);
+//                    vis_.removeAllPointClouds(vp3_);
+
+
+//                    pcl::PointCloud<PT>::Ptr cloud_temp(new pcl::PointCloud<PT>());
+//                    cloud_temp = cloud;
+
+//                    typename v4r::Source<PT>::Ptr m_db_ = recognizer->getModelDatabase();
+//                    for(size_t i=0; i<verified_hypotheses.size(); i++)
+//                    {
+//                        const v4r::ObjectHypothesis<PT> &oh = *verified_hypotheses[i];
+//                        bool found_model;
+//                        typename v4r::Model<PT>::ConstPtr m = m_db_->getModelById(oh.class_id_, oh.model_id_, found_model);
+//                        const std::string model_id = m->id_.substr(0, m->id_.length() - 4);
+//                        std::stringstream model_label;
+//                        model_label << model_id << "_verified_" << i;
+//                        typename pcl::PointCloud<PT>::Ptr model_aligned ( new pcl::PointCloud<PT>() );
+//                        typename pcl::PointCloud<PT>::ConstPtr model_cloud = m->getAssembled(3);
+//                        pcl::transformPointCloud( *model_cloud, *model_aligned, oh.transform_);
+//                        vis_.addPointCloud(model_aligned, model_label.str(), vp1_);
+//                    }
+
+//                    //vis_.addPointCloud(, "input", vp1_);
+//                    vis_.addPointCloud(old_cloud, "input_2", vp2_);
+//                    vis_.addPointCloud(cloud, "input_3", vp3_);
+
+//                    vis_.setCameraPosition(0, 0, 0, 0, 0, 1, 0, -1, 0);
+//                    vis_.setBackgroundColor(1,1,1);
+//                    vis_.resetCamera();
+//                    vis_.spin();
+
+
+                    std::vector<v4r::ObjectHypothesesGroup<PT> > generated_object_hypotheses;// = recognizer.getGeneratedObjectHypothesis();
                     elapsed_time.push_back( t.getTime() );
 
                     if ( !out_dir_eval.empty() )  // write results to disk (for each verified hypothesis add a row in the text file with object name, dummy confidence value and object pose in row-major order)
@@ -227,18 +280,20 @@ main (int argc, char ** argv)
                             }
                         }
                         f.close();
+
+                        old_cloud = cloud;
                     }
                 }
 
         }
             v4r::apps::RecognitionEvaluator e;
-            e.setModels_dir(recognizer.getModelsDir());
+            e.setModels_dir(recognizer->getModelsDir());
             e.setTest_dir(test_dir);
             e.setOr_dir(out_dir_eval);
             e.setGt_dir(gt_dir);
             e.setOut_dir(out_dir_eval);
             e.setUse_generated_hypotheses(false);
-            e.setVisualize(false);
+            e.setVisualize(true);
             float recognition_rate = e.compute_recognition_rate_over_occlusion();
             size_t tp, fp, fn;
             e.compute_recognition_rate(tp, fp, fn);
