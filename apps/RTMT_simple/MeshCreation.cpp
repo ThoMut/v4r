@@ -142,7 +142,7 @@ void MeshCreation::calculateMesh()
     // parameters
 
     // General
-    std::string base_path("/home/thomas/DA/shared_docker_host/data/texture_test");
+//    std::string base_path("/home/thomas/DA/shared_docker_host/data/texture_test");
 
     // poisson
     bool crop_model = true;
@@ -150,16 +150,6 @@ void MeshCreation::calculateMesh()
     //pcl::io::loadPCDFile ("/home/thomas/DA/shared_docker_host/data/texture_test/cleaning_agent/3D_model.pcd", *model_cloud);
 
     v4r::texturing::Renderer renderer;
-
-    std::vector< std::string> training_dir_names;   // equal to class names
-    training_dir_names = v4r::io::getFoldersInDirectory(base_path);
-
-
-    std::string textured_meshes_model;
-    textured_meshes_model.append(base_path);
-    textured_meshes_model.append("/");
-    textured_meshes_model.append(training_dir_names[0]);
-    textured_meshes_model.append("/mesh");
 
     cout<<"crop_model="<<crop_model<<endl;
 
