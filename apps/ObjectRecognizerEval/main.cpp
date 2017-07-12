@@ -238,7 +238,7 @@ main (int argc, char ** argv)
             e.setGt_dir(gt_dir);
             e.setOut_dir(out_dir_eval);
             e.setUse_generated_hypotheses(false);
-            e.setVisualize(false);
+            e.setVisualize(true);
             float recognition_rate = e.compute_recognition_rate_over_occlusion();
             size_t tp, fp, fn;
             e.compute_recognition_rate(tp, fp, fn);

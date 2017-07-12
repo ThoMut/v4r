@@ -43,11 +43,11 @@ main (int argc, char ** argv)
 
     std::vector< std::string > scenes = v4r::io::getFilesInDirectory( test_file, ".*.pcd", false );
 
-    for(int i=1; i<=4; ++i)
+    for(int i=1; i<=3; ++i)
     {
        std::string test_file1 = test_file;
 
-        test_file1.append("change" + std::to_string(i) + ".pcd");
+        test_file1.append("/scene_shadow_" + std::to_string(i) + ".pcd");
         LOG(INFO) << "Recognizing file " << test_file1;
         pcl::PointCloud<PT>::Ptr cloud(new pcl::PointCloud<PT>());
         pcl::io::loadPCDFile( test_file1, *cloud);
