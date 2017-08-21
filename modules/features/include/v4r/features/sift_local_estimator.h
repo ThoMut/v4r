@@ -93,8 +93,8 @@ public:
         descr_dims_ = 128;
 
         //init sift
-//        const char *argv[] = {"-m", "-fo","-1", "-s", "-v", "0", "-pack", "-maxd", "8192"};   // for Kinect v2
-        const char *argv[] = {"-m", "-fo","-1", "-s", "-v", "0", "-pack"};  // for Kinect v1
+        const char *argv[] = {"-m", "-fo","-1", "-s", "-v", "0", "-pack", "-maxd", "8192"};   // for Kinect v2
+//        const char *argv[] = {"-m", "-fo","-1", "-s", "-v", "0", "-pack"};  // for Kinect v1
         int argc = sizeof(argv) / sizeof(char*);
         sift_.reset(new SiftGPU());
         sift_->ParseParam (argc, (char **)argv);
