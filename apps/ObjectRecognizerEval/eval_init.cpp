@@ -193,32 +193,32 @@ main (int argc, char ** argv)
                     pcl::PointCloud<PT>::Ptr empty_workspace(new pcl::PointCloud<PT>());
                     pcl::io::loadPCDFile( "/home/thomas/DA/shared_docker_host/data/test/scene_later/workspace_init.pcd", *empty_workspace);
 
-                    /// visual debug
-                    pcl::visualization::PCLVisualizer vis_;
-                    int vp1_, vp2_, vp3_;
-                    vis_.createViewPort(0,0,0.33,1, vp1_);
-                    vis_.createViewPort(0.33,0,0.66,1, vp2_);
-                    vis_.createViewPort(0.66, 0, 1, 1,vp3_);
+//                    /// visual debug
+//                    pcl::visualization::PCLVisualizer vis_;
+//                    int vp1_, vp2_, vp3_;
+//                    vis_.createViewPort(0,0,0.33,1, vp1_);
+//                    vis_.createViewPort(0.33,0,0.66,1, vp2_);
+//                    vis_.createViewPort(0.66, 0, 1, 1,vp3_);
 
-                    vis_.removeAllPointClouds();
-                    vis_.removeAllPointClouds(vp1_);
-                    vis_.removeAllPointClouds(vp2_);
-                    vis_.removeAllPointClouds(vp3_);
+//                    vis_.removeAllPointClouds();
+//                    vis_.removeAllPointClouds(vp1_);
+//                    vis_.removeAllPointClouds(vp2_);
+//                    vis_.removeAllPointClouds(vp3_);
 
 
-                    pcl::PointCloud<PT>::Ptr cloud_temp(new pcl::PointCloud<PT>());
-                    cloud_temp = cloud;
+//                    pcl::PointCloud<PT>::Ptr cloud_temp(new pcl::PointCloud<PT>());
+//                    cloud_temp = cloud;
 
-                    cloud = detector.segment_difference(empty_workspace, cloud);
+//                    cloud = detector.segment_difference(empty_workspace, cloud);
 
-                    vis_.addPointCloud(empty_workspace, "input", vp1_);
-                    vis_.addPointCloud(cloud_temp, "input_2", vp2_);
-                    vis_.addPointCloud(cloud, "input_3", vp3_);
+//                    vis_.addPointCloud(empty_workspace, "input", vp1_);
+//                    vis_.addPointCloud(cloud_temp, "input_2", vp2_);
+//                    vis_.addPointCloud(cloud, "input_3", vp3_);
 
-                    vis_.setCameraPosition(0, 0, 0, 0, 0, 1, 0, -1, 0);
-                    vis_.setBackgroundColor(1,1,1);
-                    vis_.resetCamera();
-                    vis_.spin();
+//                    vis_.setCameraPosition(0, 0, 0, 0, 0, 1, 0, -1, 0);
+//                    vis_.setBackgroundColor(1,1,1);
+//                    vis_.resetCamera();
+//                    vis_.spin();
 
                     pcl::StopWatch t;
 
@@ -278,10 +278,11 @@ main (int argc, char ** argv)
             e.setGt_dir(gt_dir);
             e.setOut_dir(out_dir_eval);
             e.setUse_generated_hypotheses(false);
-            e.setVisualize(false);
+            e.setVisualize(true);
             float recognition_rate = e.compute_recognition_rate_over_occlusion();
             size_t tp, fp, fn;
-            e.compute_recognition_rate(tp, fp, fn);
+            double dummy1, dummy2;
+            e.compute_recognition_rate(tp, fp, fn, dummy1, dummy2);
 
 
             float median_time_ms = std::numeric_limits<float>::max();

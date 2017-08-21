@@ -89,7 +89,7 @@ public:
         };
 
         vis_params_.reset(new PCLVisualizationParams());
-        vis_params_->bg_color_ = Eigen::Vector3i(255,255,255);
+        vis_params_->bg_color_ = Eigen::Vector3i(0,0,0);
         vis_params_->coordinate_axis_scale_ = 0.04f;
     }
 
@@ -194,7 +194,7 @@ public:
         rotational_symmetric_objects_ = rotational_symmetric_objects;
     }
 
-    void compute_recognition_rate (size_t &total_tp, size_t &total_fp, size_t &total_fn);
+    void compute_recognition_rate (size_t &total_tp, size_t &total_fp, size_t &total_fn , double &average_translation_error, double &average_rotational_error);
     float compute_recognition_rate_over_occlusion (); ///< basically checks for each ground-truth object if there exists a corresponding recognized object
     void checkIndividualHypotheses(); ///< check for each recognized object if there is a corresponding ground-truth object<w
 

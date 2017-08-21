@@ -181,7 +181,16 @@ main (int argc, char ** argv)
                     pcl::PointCloud<PT>::Ptr cloud(new pcl::PointCloud<PT>());
                     pcl::io::loadPCDFile( test_path.string(), *cloud);
 
+                    //mark: reading in test_scene
+//                    size_t reps = 3;
+//                    for(size_t rep = 0; rep < reps; ++rep)
+//                    {
                     pcl::StopWatch t;
+
+                    //reinitialize to captcher variance
+                    v4r::apps::ObjectRecognizerParameter or_param (recognizer_config);
+                    v4r::apps::ObjectRecognizer<PT> recognizer(or_param);
+                    recognizer.initialize(to_pass_further_tmp);
 
                     std::vector<typename v4r::ObjectHypothesis<PT>::Ptr > verified_hypotheses = recognizer.recognize(cloud);
                     std::vector<v4r::ObjectHypothesesGroup<PT> > generated_object_hypotheses = recognizer.getGeneratedObjectHypothesis();
@@ -202,7 +211,7 @@ main (int argc, char ** argv)
                         std::ofstream f ( out_path.string().c_str() );
                         for ( const v4r::ObjectHypothesis<PT>::Ptr &voh : verified_hypotheses )
                         {
-                            f << voh->model_id_ << " (-1.): ";
+                            f << voh->model_id_ << " (" << voh->confidence_ << "): ";
                             for (size_t row=0; row <4; row++)
                                 for(size_t col=0; col<4; col++)
                                     f << voh->transform_(row, col) << " ";
@@ -218,7 +227,7 @@ main (int argc, char ** argv)
                         {
                             for ( const v4r::ObjectHypothesis<PT>::Ptr &goh : gohg.ohs_ )
                             {
-                                f << goh->model_id_ << " (-1.): ";
+                                f << goh->model_id_ << " (" << goh->confidence_ << "): ";
                                 for (size_t row=0; row <4; row++)
                                     for(size_t col=0; col<4; col++)
                                         f << goh->transform_(row, col) << " ";
@@ -227,6 +236,7 @@ main (int argc, char ** argv)
                             }
                         }
                         f.close();
+//                    }
                     }
                 }
 
@@ -241,7 +251,8 @@ main (int argc, char ** argv)
             e.setVisualize(true);
             float recognition_rate = e.compute_recognition_rate_over_occlusion();
             size_t tp, fp, fn;
-            e.compute_recognition_rate(tp, fp, fn);
+            double average_translation_error, average_rotational_error;
+            e.compute_recognition_rate(tp, fp, fn, average_translation_error, average_rotational_error);
 
 
             float median_time_ms = std::numeric_limits<float>::max();
@@ -256,15 +267,15 @@ main (int argc, char ** argv)
             double score = 4*recall + precision - median_time_ms*0.01*0.01;    // we want to get as much hypotheses as possible - precision will be improved with verification
 
             LOG(WARNING) << "RECOGNITION RATE: " << recognition_rate << ", median time: " << median_time_ms
-                      << ", fp: " << fp << ", tp: " << tp << ", fn: " << fn
+                      << ", tp: " << tp << ", fp: " << fp << ", fn: " << fn
                       << ", precision: " << precision << ", recall: " << recall << ", fscore: " << fscore;
 
             std::cout << "RECOGNITION RATE: " << recognition_rate << ", median time: " << median_time_ms
-                      << ", fp: " << fp << ", tp: " << tp << ", fn: " << fn
+                      << ", tp: " << tp << ", fp: " << fp << ", fn: " << fn
                       << ", precision: " << precision << ", recall: " << recall
-                      << ", fscore: " << fscore << ", score: " << score << std::endl;
+                      << ", fscore: " << fscore << ", avg trans error: " << (average_translation_error*1000.0) << "mm" << " " << ", avg rot error:" << average_rotational_error << "°" << std::endl;
 
-            of_results << counter-1 << " " << recognition_rate << " " << median_time_ms << " " << fp << " " << tp << " " << fn << " " << precision << " " << recall << " " << fscore << std::endl;
+            of_results << counter-1 << "," << recognition_rate << "," << median_time_ms << "," << tp << "," << fp << "," << fn << "," << precision << "," << recall << "," << fscore << "," << average_translation_error << "," << average_rotational_error << std::endl;
 
 //            if( score > best_score && precision > 0.05f)
 //            {

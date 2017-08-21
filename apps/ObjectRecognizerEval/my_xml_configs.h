@@ -39,62 +39,62 @@ std::vector< std::pair< std::vector<XMLChange>, bool > > loadChanges()
         grouped_changes.push_back( grouped_change );
     }
 
-//    {
-//        bool local_search_is_okay = true;
-//        std::pair< std::vector<XMLChange>, bool > grouped_change;
-//        grouped_change.first.push_back( XMLChange("cfg/multipipeline_config.xml", "cg_size_", {"0.005"}, false ) );
-//        grouped_change.first.push_back( XMLChange("cfg/multipipeline_config.xml", "cg_size_", {"0.01"}, false ) );
-//        grouped_change.first.push_back( XMLChange("cfg/multipipeline_config.xml", "cg_size_", {"0.05"}, false ) );
-//        grouped_change.second = local_search_is_okay;
-//        grouped_changes.push_back( grouped_change );
-//    }
+    {
+        bool local_search_is_okay = true;
+        std::pair< std::vector<XMLChange>, bool > grouped_change;
+        grouped_change.first.push_back( XMLChange("cfg/multipipeline_config.xml", "cg_size_", {"0.005"}, false ) );
+        grouped_change.first.push_back( XMLChange("cfg/multipipeline_config.xml", "cg_size_", {"0.01"}, false ) );
+        grouped_change.first.push_back( XMLChange("cfg/multipipeline_config.xml", "cg_size_", {"0.05"}, false ) );
+        grouped_change.second = local_search_is_okay;
+        grouped_changes.push_back( grouped_change );
+    }
 
-//    {
-//        bool local_search_is_okay = true;
-//        std::pair< std::vector<XMLChange>, bool > grouped_change;
-//        grouped_change.first.push_back( XMLChange("cfg/sift_config.xml", "filter_border_pts_", {"0"}, false ) );
-//        grouped_change.first.push_back( XMLChange("cfg/sift_config.xml", "filter_border_pts_", {"1"}, false ) );
-//        grouped_change.second = local_search_is_okay;
-//        grouped_changes.push_back( grouped_change );
-//    }
+    {
+        bool local_search_is_okay = true;
+        std::pair< std::vector<XMLChange>, bool > grouped_change;
+        grouped_change.first.push_back( XMLChange("cfg/sift_config.xml", "filter_border_pts_", {"0"}, false ) );
+        grouped_change.first.push_back( XMLChange("cfg/sift_config.xml", "filter_border_pts_", {"1"}, false ) );
+        grouped_change.second = local_search_is_okay;
+        grouped_changes.push_back( grouped_change );
+    }
 
-//    {
-//        bool local_search_is_okay = true;
-//        std::pair< std::vector<XMLChange>, bool > grouped_change;
-//        grouped_change.first.push_back( XMLChange("cfg/sift_config.xml", "distance_metric_", {"1"}, false ) );
-//        grouped_change.first.push_back( XMLChange("cfg/sift_config.xml", "distance_metric_", {"4"}, false ) );
-//        grouped_change.second = local_search_is_okay;
-//        grouped_changes.push_back( grouped_change );
-//    }
+    {
+        bool local_search_is_okay = true;
+        std::pair< std::vector<XMLChange>, bool > grouped_change;
+        grouped_change.first.push_back( XMLChange("cfg/sift_config.xml", "distance_metric_", {"1"}, false ) );
+        grouped_change.first.push_back( XMLChange("cfg/sift_config.xml", "distance_metric_", {"4"}, false ) );
+        grouped_change.second = local_search_is_okay;
+        grouped_changes.push_back( grouped_change );
+    }
 
-//    {
-//        bool local_search_is_okay = true;
-//        std::pair< std::vector<XMLChange>, bool > grouped_change;
-//        grouped_change.first.push_back( XMLChange("cfg/sift_config.xml", "kdtree_num_trees_", {"4"}, false ) );
-//        grouped_change.first.push_back( XMLChange("cfg/sift_config.xml", "kdtree_num_trees_", {"8"}, false ) );
-//        grouped_change.second = local_search_is_okay;
-//        grouped_changes.push_back( grouped_change );
-//    }
+    {
+        bool local_search_is_okay = true;
+        std::pair< std::vector<XMLChange>, bool > grouped_change;
+        grouped_change.first.push_back( XMLChange("cfg/sift_config.xml", "kdtree_num_trees_", {"4"}, false ) );
+        grouped_change.first.push_back( XMLChange("cfg/sift_config.xml", "kdtree_num_trees_", {"8"}, false ) );
+        grouped_change.second = local_search_is_okay;
+        grouped_changes.push_back( grouped_change );
+    }
 
-//    {
-//        bool local_search_is_okay = true;
-//        std::pair< std::vector<XMLChange>, bool > grouped_change;
-//        grouped_change.first.push_back( XMLChange("cfg/sift_config.xml", "kdtree_splits_", {"512"}, false ) );
-//        grouped_change.first.push_back( XMLChange("cfg/sift_config.xml", "kdtree_splits_", {"264"}, false ) );
-//        grouped_change.first.push_back( XMLChange("cfg/sift_config.xml", "kdtree_splits_", {"1024"}, false ) );
-//        grouped_change.second = local_search_is_okay;
-//        grouped_changes.push_back( grouped_change );
-//    }
+    {
+        bool local_search_is_okay = true;
+        std::pair< std::vector<XMLChange>, bool > grouped_change;
+        grouped_change.first.push_back( XMLChange("cfg/sift_config.xml", "kdtree_splits_", {"512"}, false ) );
+        grouped_change.first.push_back( XMLChange("cfg/sift_config.xml", "kdtree_splits_", {"264"}, false ) );
+        grouped_change.first.push_back( XMLChange("cfg/sift_config.xml", "kdtree_splits_", {"1024"}, false ) );
+        grouped_change.second = local_search_is_okay;
+        grouped_changes.push_back( grouped_change );
+    }
 
-//    {
-//        bool local_search_is_okay = true;
-//        std::pair< std::vector<XMLChange>, bool > grouped_change;
-//        grouped_change.first.push_back( XMLChange("cfg/hv_config.xml", "smoothing_radius_", {"1"}, false ) );
-//        grouped_change.first.push_back( XMLChange("cfg/hv_config.xml", "smoothing_radius_", {"2"}, false ) );
-//        grouped_change.first.push_back( XMLChange("cfg/hv_config.xml", "smoothing_radius_", {"3"}, false ) );
-//        grouped_change.second = local_search_is_okay;
-//        grouped_changes.push_back( grouped_change );
-//    }
+    {
+        bool local_search_is_okay = true;
+        std::pair< std::vector<XMLChange>, bool > grouped_change;
+        grouped_change.first.push_back( XMLChange("cfg/hv_config.xml", "smoothing_radius_", {"1"}, false ) );
+        grouped_change.first.push_back( XMLChange("cfg/hv_config.xml", "smoothing_radius_", {"2"}, false ) );
+        grouped_change.first.push_back( XMLChange("cfg/hv_config.xml", "smoothing_radius_", {"3"}, false ) );
+        grouped_change.second = local_search_is_okay;
+        grouped_changes.push_back( grouped_change );
+    }
 
       {
   //            bool local_search_is_okay = false;

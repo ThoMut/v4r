@@ -136,12 +136,12 @@ public:
             LOG(INFO) << voh->model_id_ << std::endl;
         }
 
-              pcl::visualization::PCLVisualizer viewer("3D Viewer");
-              viewer.addPointCloud(cloud_filtered, "our point cloud");
-              viewer.setBackgroundColor(1,1,1);
-              viewer.setCameraPosition(0, 0, 0, 0, 0, 1, 0, -1, 0);
-              viewer.resetCamera();
-              viewer.spin();
+//              pcl::visualization::PCLVisualizer viewer("3D Viewer");
+//              viewer.addPointCloud(cloud_filtered, "our point cloud");
+//              viewer.setBackgroundColor(1,1,1);
+//              viewer.setCameraPosition(0, 0, 0, 0, 0, 1, 0, -1, 0);
+//              viewer.resetCamera();
+//              viewer.spin();
 
         return hypotheses_output; //verified_hypotheses
     }
@@ -162,11 +162,44 @@ public:
         unsigned int number_points = cloud_in->width * cloud_in->height;
         cloud_out->points.resize(number_points);
 
-        float z_target;
+//        std::cout <<
+
+        float z_target, r_target, g_target, b_target, z_in, r_in, g_in, b_in, dif_rgb, target_rgb, in_rgb;
         for(unsigned int i=0; i<number_points; ++i)
         {
             z_target = cloud_target->points[i].z;
-            if(std::fabs(z_target - cloud_in->points[i].z) >= 0.02*z_target*z_target)
+            z_in = cloud_in->points[i].z;
+
+            if(std::isnan(z_target))
+                continue;
+
+            if(std::isnan(z_in)) {
+                cloud_out->points[i] = cloud_target->points[i];
+                continue;
+            }
+
+            r_in = cloud_in->points[i].r;
+            g_in = cloud_in->points[i].g;
+            b_in = cloud_in->points[i].b;
+            in_rgb = std::sqrt(std::pow(r_in,2) + std::pow(g_in,2) + std::pow(b_in,2));
+
+            r_in = r_in/in_rgb;
+            g_in = g_in/in_rgb;
+            b_in = b_in/in_rgb;
+
+            r_target = cloud_target->points[i].r;
+            g_target = cloud_target->points[i].g;
+            b_target = cloud_target->points[i].b;
+            target_rgb = std::sqrt(std::pow(r_target,2) + std::pow(g_target,2) + std::pow(b_target,2));
+
+            r_target = r_target/target_rgb;
+            g_target = g_target/target_rgb;
+            b_target = b_target/target_rgb;
+
+            dif_rgb = std::sqrt(std::pow(r_target - r_in,2) + std::pow(g_target - g_in,2) + std::pow(b_target - b_in,2));
+
+            //std::fabs(r_target - cloud_in->points[i].r) >= color_thres*r_target))
+            if((std::fabs(z_target - z_in) >= 0.02*z_target*z_target) || dif_rgb > 0.3)
             {
                 cloud_out->points[i] = cloud_target->points[i];
             }
@@ -174,54 +207,55 @@ public:
       //return cloud_out;
 
       /// outlier removal:
-      //moving a window over the organized point cloud, only patches size of window_size*window_size are accepted
-      typename pcl::PointCloud<PointT>::Ptr cloud_filtered (new pcl::PointCloud<PointT>);
-      cloud_filtered->width = cloud_in->width;
-      cloud_filtered->height = cloud_in->height;
+//      //moving a window over the organized point cloud, only patches size of window_size*window_size are accepted
+//      typename pcl::PointCloud<PointT>::Ptr cloud_filtered (new pcl::PointCloud<PointT>);
+//      cloud_filtered->width = cloud_in->width;
+//      cloud_filtered->height = cloud_in->height;
 
-      unsigned int number_points1 = cloud_in->width * cloud_in->height;
-      cloud_filtered->points.resize(number_points1);
+//      unsigned int number_points1 = cloud_in->width * cloud_in->height;
+//      cloud_filtered->points.resize(number_points1);
 
-      int window_size = 5;
-      //moving window over organized point cloud
-      for(unsigned int i=0; i<cloud_out->width - window_size; ++i)
-      {
-      for(unsigned int jj=0; jj<cloud_out->height - window_size; ++jj)
-      {
-          //if data of actual point is != 0 the whole patch (window_size*window_size) is checkt
-          if(cloud_out->at(i,jj).rgb != 0)
-          {
-              bool store = true;
-              for(int k=0; k<=window_size; ++k)
-              {
-              for(int mm=0; mm<=window_size; ++mm)
-              {
-                  if(cloud_out->at(i+k,jj+mm).rgb == 0)
-                  {
-                      k =window_size+1;
-                      mm= window_size+1;
-                      store = false;
-                  }
-              }
-              }
+//      int window_size = 5;
+//      //moving window over organized point cloud
+//      for(unsigned int i=0; i<cloud_out->width - window_size; ++i)
+//      {
+//      for(unsigned int jj=0; jj<cloud_out->height - window_size; ++jj)
+//      {
+//          //if data of actual point is != 0 the whole patch (window_size*window_size) is checkt
+//          if(cloud_out->at(i,jj).rgb != 0)
+//          {
+//              bool store = true;
+//              for(int k=0; k<=window_size; ++k)
+//              {
+//              for(int mm=0; mm<=window_size; ++mm)
+//              {
+//                  if(cloud_out->at(i+k,jj+mm).rgb == 0)
+//                  {
+//                      k =window_size+1;
+//                      mm= window_size+1;
+//                      store = false;
+//                  }
+//              }
+//              }
 
-              //if the whole patch is filled with data, it gets accepted
-              if(store == true)
-              {
-                  for(int k=0; k<=window_size; ++k)
-                  {
-                  for(int mm=0; mm<=window_size; ++mm)
-                  {
-                      cloud_filtered->at(i+k,jj+mm) = cloud_out->at(i+k,jj+mm);
-                  }
-                  }
-                  jj=jj+window_size;
-              }
-          }
-      }
-      }
+//              //if the whole patch is filled with data, it gets accepted
+//              if(store == true)
+//              {
+//                  for(int k=0; k<=window_size; ++k)
+//                  {
+//                  for(int mm=0; mm<=window_size; ++mm)
+//                  {
+//                      cloud_filtered->at(i+k,jj+mm) = cloud_out->at(i+k,jj+mm);
+//                  }
+//                  }
+//                  jj=jj+window_size;
+//              }
+//          }
+//      }
+//      }
 
-      return cloud_filtered;
+//      return cloud_filtered;
+        return cloud_out;
 
     } //end init_empty_scene
 
@@ -255,7 +289,7 @@ public:
         LOG(INFO) << "# calculate normals of new scene #"<< std::endl;
 
         pcl::PointCloud<pcl::Normal>::Ptr normals;
-        normal_estimator_->setInputCloud( cloud_original ); //cloud_target
+        normal_estimator_->setInputCloud( cloud_original ); //cloud_targe
         normals = normal_estimator_->compute();
 
         LOG(INFO) << "# start hypotheses verification on new scene #"<< std::endl;

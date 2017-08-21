@@ -210,23 +210,23 @@ main (int argc, char ** argv)
 //                    vis_.removeAllPointClouds(vp3_);
 
 
-//                    pcl::PointCloud<PT>::Ptr cloud_temp(new pcl::PointCloud<PT>());
-//                    cloud_temp = cloud;
+////                    pcl::PointCloud<PT>::Ptr cloud_temp(new pcl::PointCloud<PT>());
+////                    cloud_temp = cloud;
 
-//                    typename v4r::Source<PT>::Ptr m_db_ = recognizer->getModelDatabase();
-//                    for(size_t i=0; i<verified_hypotheses.size(); i++)
-//                    {
-//                        const v4r::ObjectHypothesis<PT> &oh = *verified_hypotheses[i];
-//                        bool found_model;
-//                        typename v4r::Model<PT>::ConstPtr m = m_db_->getModelById(oh.class_id_, oh.model_id_, found_model);
-//                        const std::string model_id = m->id_.substr(0, m->id_.length() - 4);
-//                        std::stringstream model_label;
-//                        model_label << model_id << "_verified_" << i;
-//                        typename pcl::PointCloud<PT>::Ptr model_aligned ( new pcl::PointCloud<PT>() );
-//                        typename pcl::PointCloud<PT>::ConstPtr model_cloud = m->getAssembled(3);
-//                        pcl::transformPointCloud( *model_cloud, *model_aligned, oh.transform_);
-//                        vis_.addPointCloud(model_aligned, model_label.str(), vp1_);
-//                    }
+////                    typename v4r::Source<PT>::Ptr m_db_ = recognizer->getModelDatabase();
+////                    for(size_t i=0; i<verified_hypotheses.size(); i++)
+////                    {
+////                        const v4r::ObjectHypothesis<PT> &oh = *verified_hypotheses[i];
+////                        bool found_model;
+////                        typename v4r::Model<PT>::ConstPtr m = m_db_->getModelById(oh.class_id_, oh.model_id_, found_model);
+////                        const std::string model_id = m->id_.substr(0, m->id_.length() - 4);
+////                        std::stringstream model_label;
+////                        model_label << model_id << "_verified_" << i;
+////                        typename pcl::PointCloud<PT>::Ptr model_aligned ( new pcl::PointCloud<PT>() );
+////                        typename pcl::PointCloud<PT>::ConstPtr model_cloud = m->getAssembled(3);
+////                        pcl::transformPointCloud( *model_cloud, *model_aligned, oh.transform_);
+////                        vis_.addPointCloud(model_aligned, model_label.str(), vp1_);
+////                    }
 
 //                    //vis_.addPointCloud(, "input", vp1_);
 //                    vis_.addPointCloud(old_cloud, "input_2", vp2_);
@@ -296,7 +296,8 @@ main (int argc, char ** argv)
             e.setVisualize(true);
             float recognition_rate = e.compute_recognition_rate_over_occlusion();
             size_t tp, fp, fn;
-            e.compute_recognition_rate(tp, fp, fn);
+            double dummy1, dummy2;
+            e.compute_recognition_rate(tp, fp, fn, dummy1, dummy2);
 
 
             float median_time_ms = std::numeric_limits<float>::max();

@@ -65,9 +65,10 @@ RecognitionEvaluator::computeError(const Eigen::Matrix4f &pose_a, const Eigen::M
         if( is_rotational_symmetric )
             angleXY = std::min<float>(angleXY, fabs( 180.f - angleXY) );
     }
-
+//Mark: rotation errors in x,y,z
 //    std::cout << " error_rotxy: " << angleXY << " error_rotx: " << angleX << " error_roty: " << angleY << " error_rotz: " << angleZ << std::endl;
 
+  // trans_errror in all coordinates
     trans_error = (centroid_a.head(3)-centroid_b.head(3)).norm();
     rot_error = std::max<float>(angleXY, angleZ);
 
@@ -339,7 +340,7 @@ RecognitionEvaluator::visualizeResults(const typename pcl::PointCloud<PointT>::P
 }
 
 void
-RecognitionEvaluator::compute_recognition_rate (size_t &total_tp, size_t &total_fp, size_t &total_fn)
+RecognitionEvaluator::compute_recognition_rate (size_t &total_tp, size_t &total_fp, size_t &total_fn, double &average_translation_error, double &average_rotational_error)
 {
     std::stringstream description;
     description << "Tool to compute object instance recognition rate." << std::endl <<
@@ -363,6 +364,9 @@ RecognitionEvaluator::compute_recognition_rate (size_t &total_tp, size_t &total_
     total_tp = 0;
     total_fp = 0;
     total_fn = 0;
+
+    double total_sum_translation_error = 0;
+    double total_sum_rotational_error = 0;
 
 
     std::cout << "path" << gt_dir << std::endl;
@@ -529,11 +533,15 @@ RecognitionEvaluator::compute_recognition_rate (size_t &total_tp, size_t &total_
         }
 
         std::cout << anno_file << ": " << tp_view << " " << fp_view << " " << fn_view << " " << sum_translation_error_view << " " << sum_rotational_error_view << std::endl;
-        of << anno_file << " " << tp_view << " " << fp_view << " " << fn_view << " " << sum_translation_error_view << " " << sum_rotational_error_view << std::endl;
+        of << anno_file << "," << tp_view << "," << fp_view << "," << fn_view << "," << sum_translation_error_view << "," << sum_rotational_error_view << std::endl;
+        //Mark: Results written to file
 
         total_tp += tp_view;
         total_fp += fp_view;
         total_fn += fn_view;
+
+        total_sum_translation_error += sum_translation_error_view;
+        total_sum_rotational_error += sum_rotational_error_view;
 
         if(visualize_)
         {
@@ -570,7 +578,11 @@ RecognitionEvaluator::compute_recognition_rate (size_t &total_tp, size_t &total_
             vis_.reset();
         }
     }
-    std::cout << "Checkpoint 3" << std::endl;
+
+    if(total_tp > 0) {
+        average_translation_error = total_sum_translation_error/total_tp;
+        average_rotational_error = total_sum_rotational_error/total_tp;
+    }
 
     of.close();
 }

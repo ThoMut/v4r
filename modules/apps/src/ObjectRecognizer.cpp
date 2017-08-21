@@ -287,7 +287,7 @@ void ObjectRecognizer<PointT>::initialize(const std::vector<std::string> &comman
     {
         // --plane_extraction_method 8 -z 2 --remove_points_below_selected_plane 1 --remove_planes 0 --plane_extractor_maxStepSize 0.1 --use_highest_plane 1 --min_plane_inliers 10000
        //"--min_plane_inliers", "10000",
-        std::vector<std::string> additional_cs_arguments = {};
+        std::vector<std::string> additional_cs_arguments = {"--min_plane_inliers", std::to_string(param_.min_plane_inliers_)};
 
         to_pass_further.insert(to_pass_further.end(), additional_cs_arguments.begin(), additional_cs_arguments.end());
         v4r::apps::CloudSegmenterParameter cs_param;
